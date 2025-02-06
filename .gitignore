@@ -1,0 +1,40 @@
+.externalNativeBuild
+.cxx
+
+# Diretórios do Android Studio
+.idea/
+.gradle/
+local.properties
+/.cxx/
+captures/
+
+# Build e dependências
+*.iml
+build/
+app/build/
+*/build/
+*/bin/
+*/gen/
+
+# Arquivos de cache e logs
+*.log
+*.swp
+*.swo
+*.swn
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Arquivos de APKs e AABs gerados
+*.apk
+*.aab
+*.apks
+
+# Credenciais sensíveis
+*.keystore
+*.jks
+/google-services.json
+
