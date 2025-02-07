@@ -13,21 +13,17 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
 
-    @Module
-    @InstallIn(SingletonComponent::class)
-    object NetworkModule {
-
-        @Provides
-        @Singleton
-        fun providePokemonApi(retrofit: Retrofit): PokemonAPI {
-            return retrofit.create(PokemonAPI::class.java)
-        }
-
-        @Provides
-        @Singleton
-        fun provideRetrofit(): Retrofit {
-            return Retrofit.Builder().baseUrl("https://pokeapi.co/api/v2/")
-                .addConverterFactory(GsonConverterFactory.create()).build()
-        }
+    @Provides
+    @Singleton
+    fun providePokemonApi(retrofit: Retrofit): PokemonAPI {
+        return retrofit.create(PokemonAPI::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(): Retrofit {
+        return Retrofit.Builder().baseUrl("https://pokeapi.co/api/v2/")
+            .addConverterFactory(GsonConverterFactory.create()).build()
+    }
+
 }

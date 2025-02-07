@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.initFields()
 
+        binding.progressbar.visibility = View.GONE
+
     }
 
     private fun ActivityMainBinding.initFields() {

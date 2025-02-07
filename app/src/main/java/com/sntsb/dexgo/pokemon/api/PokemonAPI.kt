@@ -1,34 +1,66 @@
 package com.sntsb.dexgo.pokemon.api
 
-import com.sntsb.dexgo.pokemon.model.PokemonDetailModel
-import com.sntsb.dexgo.pokemon.model.PokemonImageModel
-import com.sntsb.dexgo.pokemon.model.PokemonModel
-import com.sntsb.dexgo.type.model.TypeModel
+import com.google.gson.annotations.SerializedName
 import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface PokemonAPI {
 
     @GET("pokemon")
-    suspend fun getPokemonList(): List<PokemonModel>
+    suspend fun getPokemonList(): PokemonResponse
 
-    @GET("pokemon/{id}")
-    suspend fun getPokemonDetails(@Path("id") id: Int): PokemonDetailModel
+    @GET("pokemon")
+    suspend fun getPokemonList(
+        @Query("limit") limit: Int = LIMIT, @Query("offset") offset: Int = 0
+    ): PokemonResponse
 
-    @GET("pokemon/{id}/")
-    suspend fun getPokemonImages(@Path("id") id: Int): List<PokemonImageModel>
+    @GET("pokemon")
+    suspend fun getPokemonById(@Query("id") id: Int): PokemonDetailResponse
 
     @GET("type")
-    suspend fun getTypes(): List<TypeModel>
-
-    @GET("pokemon?limit={limit}&offset={offset}}")
-    suspend fun getPokemonsPaginated(
-        @Path("limit") limit: Int = LIMIT,
-        @Path("offset") offset: Int
-    ): List<PokemonModel>
+    suspend fun getTypes(): CategoryResponse
 
     companion object {
         const val LIMIT = 20
     }
+
+    data class Specification(
+        @SerializedName("name") val name: String, @SerializedName("url") val url: String
+    )
+
+    data class PokemonResponse(
+        @SerializedName("count") val count: Int,
+        @SerializedName("next") val next: String?,
+        @SerializedName("previous") val previous: String?,
+        @SerializedName("results") val results: List<Specification>
+    )
+
+    data class CategoryResponse(
+        @SerializedName("count") val count: Int,
+        @SerializedName("next") val next: String?,
+        @SerializedName("previous") val previous: String?,
+        @SerializedName("results") val results: List<Category>
+    )
+
+    data class PokemonDetailResponse(
+        @SerializedName("height") val height: Int,
+        @SerializedName("id") val id: Int,
+        @SerializedName("name") val name: String,
+        @SerializedName("weight") val weight: Int,
+        @SerializedName("stats") val statisticList: List<Statistic>,
+        @SerializedName("types") val typeList: List<Specification>,
+    )
+
+    data class Statistic(
+        @SerializedName("base_stat") val baseStatistic: Int,
+        @SerializedName("effort") val effort: Int,
+        @SerializedName("stat") val statistic: Specification
+
+    )
+
+    data class Category(
+        @SerializedName("slot") val slot: String,
+        @SerializedName("type") val typeList: List<Specification>
+    )
 
 }
