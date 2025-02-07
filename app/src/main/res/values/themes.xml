@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.DexGo" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.DexGo" parent="Theme.Material3.DayNight">
+
         <item name="backgroundColor">@color/color_base</item>
         <item name="colorOnPrimary">@color/color_text</item>
         <item name="android:statusBarColor">@color/color_secondary</item>
@@ -9,12 +10,99 @@
         <item name="colorPrimary">@color/color_title</item>
         <item name="colorSecondary">@color/color_secondary</item>
         <item name="colorOnSecondary">@color/color_normal</item>
+
+        <item name="chipGroupStyle">@style/Widget.App.Chip.ChipGroup</item>
+        <item name="chipStyle">@style/Widget.App.Chip</item>
+
     </style>
 
-    <style name="Theme.App.FullScreen" parent="Theme.DexGo">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowContentOverlay">@null</item>
+    <style name="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="errorIconTint">@color/design_default_color_error</item>
+        <item name="errorTextColor">@color/design_default_color_error</item>
+        <item name="boxStrokeErrorColor">@color/design_default_color_error</item>
+        <item name="hintTextColor">@color/design_default_color_primary_dark</item>
+        <item name="strokeColor">@color/black</item>
+        <item name="boxStrokeColor">@color/black</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="android:strokeColor">@color/black</item>
+
     </style>
+
+    <style name="Widget.Material3.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="errorIconTint">@color/design_default_color_error</item>
+        <item name="errorTextColor">@color/design_default_color_error</item>
+        <item name="boxStrokeErrorColor">@color/design_default_color_error</item>
+        <item name="hintTextColor">@color/design_default_color_primary_dark</item>
+        <item name="strokeColor">@color/black</item>
+        <item name="boxStrokeColor">@color/black</item>
+        <item name="boxStrokeWidth">2dp</item>
+
+        <item name="android:strokeColor">@color/black</item>
+    </style>
+
+    <style name="Widget.App.MaterialToolbar" parent="Widget.Design.TabLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:backgroundTintMode">add</item>
+        <item name="android:backgroundTint">@color/color_base</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="tabIndicatorColor">@color/design_default_color_primary_dark</item>
+        <item name="tabTextColor">@color/color_title</item>
+        <item name="tabIconTint">@color/design_default_color_primary_dark</item>
+    </style>
+
+    <style name="Widget.App.Chip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="checkedIconTint">@color/material_on_surface_emphasis_medium</item>
+        <item name="chipBackgroundColor">@color/material_dynamic_neutral0</item>
+        <item name="backgroundTint">@color/material_dynamic_neutral_variant40</item>
+        <item name="closeIconTint">@color/material_on_background_emphasis_high_type</item>
+        <item name="colorOnSurface">@color/material_dynamic_primary70</item>
+        <item name="android:textColor">@color/material_dynamic_secondary30</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStrokeColor">@color/material_dynamic_primary50</item>
+    </style>
+
+    <style name="Widget.App.ChipItem" parent="Widget.Material3.Chip.Filter">
+        <item name="checkedIconTint">@color/material_on_surface_emphasis_medium</item>
+        <item name="chipBackgroundColor">@color/material_on_background_emphasis_high_type</item>
+        <item name="android:backgroundTint">@color/material_dynamic_secondary30</item>
+        <item name="closeIconTint">@color/material_on_surface_emphasis_medium</item>
+        <item name="colorOnSurface">@color/material_dynamic_secondary30</item>
+        <item name="android:textColor">@color/color_title</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStrokeColor">@color/material_on_surface_emphasis_medium</item>
+    </style>
+
+    <style name="Widget.App.Chip.ChipGroup" parent="Widget.MaterialComponents.ChipGroup">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+
+    <style name="Widget.App.Chip.Multiselect" parent="Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/material_dynamic_secondary30</item>
+        <item name="android:textAlignment">center</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="android:textColor">@color/design_default_color_primary_dark</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStrokeColor">@color/design_default_color_primary_dark</item>
+    </style>
+
+    <style name="Widget.App.Chip.Singleselect" parent="Widget.Material3.Chip.Filter">
+        <item name="chipBackgroundColor">@color/material_dynamic_secondary30</item>
+
+        <item name="chipSpacingHorizontal">0dp</item>
+        <item name="chipStartPadding">0dp</item>
+        <item name="chipEndPadding">0dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="paddingEnd">0dp</item>
+        <item name="paddingStart">0dp</item>
+
+        <item name="android:textColor">@color/design_default_color_primary_dark</item>
+        <item name="android:textSize">12sp</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="textAllCaps">true</item>
+        <item name="chipCornerRadius">0dp</item>
+        <item name="chipStrokeColor">@color/design_default_color_primary_dark</item>
+    </style>
+
 </resources>

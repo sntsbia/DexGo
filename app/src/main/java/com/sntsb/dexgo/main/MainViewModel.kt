@@ -20,6 +20,18 @@ class MainViewModel @Inject constructor(private val repository: PokemonRepositor
         Log.e(TAG, "setTexto: ${text.value}")
     }
 
+    private val _selected = MutableLiveData<String>()
+    val selected: LiveData<String> = _selected
+
+    fun setSelected(novoTexto: String) {
+        _selected.value = novoTexto
+    }
+
+    fun refresh() {
+        _text.value = ""
+        _selected.value = ""
+    }
+
     companion object {
         private const val TAG = "MainViewModel"
     }

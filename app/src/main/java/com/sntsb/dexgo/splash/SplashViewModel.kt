@@ -9,17 +9,17 @@ import com.sntsb.dexgo.main.MainActivity
 
 class SplashViewModel : ViewModel() {
 
-    private var initiated = false
+    private var isInitialized = false
 
     fun initApp(activity: ComponentActivity) {
-        if (!initiated) {
+        if (!isInitialized) {
 
             Handler(Looper.getMainLooper()).postDelayed({
                 activity.startActivity(Intent(activity, MainActivity::class.java))
                 activity.finish()
             }, 2500)
 
-            initiated = true
+            isInitialized = true
         }
     }
 

@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">DexGo</string>
     <string name="click_me">Clique Aqui</string>
+    <string name="string_chip_1" translatable="false">Chip 1</string>
+    <string name="string_chip_2" translatable="false">Chip 2</string>
 </resources>

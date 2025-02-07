@@ -67,11 +67,13 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.swiperefreshlayout)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     implementation(libs.hilt.android)
     ksp(libs.google.hilt.android.compiler)
 
+    implementation(libs.androidx.paging.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.kotlinx.coroutines.android)
