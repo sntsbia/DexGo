@@ -1,15 +1,17 @@
 package com.sntsb.dexgo.main
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.sntsb.dexgo.R
 import com.sntsb.dexgo.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : ComponentActivity() {
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
@@ -21,22 +23,25 @@ class MainActivity : ComponentActivity() {
         actionBar?.setDisplayShowTitleEnabled(false)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        actionBar?.setDisplayShowTitleEnabled(false)
+
+        binding.initObserver()
+
         binding.myViewModel = viewModel
 
-        try {
+        viewModel.setText("Olá Mundo")
 
-            val splashScreen = installSplashScreen()
-
-            splashScreen.setOnExitAnimationListener { splashScreenView ->
-                splashScreenView.iconView.animate().setDuration(2500).alpha(0f).withEndAction {
-                    splashScreenView.remove()
-                }.start()
-
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        binding.btnText.setOnClickListener {
+            viewModel.setText()
         }
 
-        viewModel.setText()
+    }
+
+    private fun ActivityMainBinding.initObserver() {
+        viewModel.text.observe(this@MainActivity) { newText ->
+            Log.d("MainActivity", "Novo texto: $newText")
+            tvSplash.invalidate()
+        }
     }
 }

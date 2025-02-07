@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">DexGo</string>
+    <string name="app_name" translatable="false">DexGo</string>
+    <string name="click_me">Clique Aqui</string>
 </resources>
