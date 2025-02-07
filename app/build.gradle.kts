@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.sntsb.dexgo"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.sntsb.dexgo"
@@ -28,8 +28,7 @@ android {
             isDebuggable = false
             versionNameSuffix = ""
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
         debug {
@@ -65,6 +64,9 @@ dependencies {
     implementation(libs.converter.gson)
 
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     implementation(libs.hilt.android)
@@ -82,6 +84,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.glide)
     annotationProcessor(libs.compiler)
+
+    implementation(libs.androidx.core.splashscreen)
 
     testImplementation(libs.junit)
     testImplementation(libs.mockito.core)
