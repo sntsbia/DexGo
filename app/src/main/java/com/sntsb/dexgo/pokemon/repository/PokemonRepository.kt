@@ -12,16 +12,17 @@ class PokemonRepository @Inject constructor(private val pokemonApi: PokemonAPI) 
     fun getPokemonList() = "Chamou PokemonRepository"
 
     fun restart(): Pager<Int, PokemonDTO> {
-        return Pager(config = PagingConfig(pageSize = 20, enablePlaceholders = false),
-            pagingSourceFactory = { PokemonPagingSource(pokemonApi) })
-    }
-
-    fun getPokemonPager(): Pager<Int, PokemonDTO> {
         return Pager(config = PagingConfig(pageSize = PokemonAPI.LIMIT, enablePlaceholders = false),
             pagingSourceFactory = { PokemonPagingSource(pokemonApi) })
     }
 
+    fun getPokemonPager(query: String): Pager<Int, PokemonDTO> {
+        return Pager(config = PagingConfig(pageSize = PokemonAPI.LIMIT, enablePlaceholders = false),
+            pagingSourceFactory = { PokemonPagingSource(pokemonApi, query) })
+    }
+
     suspend fun getPokemon(id: Int): PokemonModel? {
+
 
         return null
     }

@@ -1,4 +1,4 @@
-package com.sntsb.dexgo.pokemon.repository
+package com.sntsb.dexgo.type.repository
 
 import android.util.Log
 import androidx.paging.PagingSource
@@ -7,27 +7,8 @@ import com.sntsb.dexgo.pokemon.api.PokemonAPI
 import com.sntsb.dexgo.pokemon.dto.PokemonDTO
 import com.sntsb.dexgo.utils.PokemonUtils
 
-class PokemonPagingSource(private val pokemonApi: PokemonAPI, private val query: String = "") :
+class TypePagingSource(private val pokemonApi: PokemonAPI, private val query: String = "") :
     PagingSource<Int, PokemonDTO>() {
-
-    private suspend fun getAllPaginado(
-        loadSize: Int, offset: Int
-    ): List<PokemonDTO> {
-
-        val response = pokemonApi.getPokemonList(loadSize, offset)
-        Log.e(TAG, "load: ${response.results.size}")
-
-        val pokemonList = response.results.mapIndexed { index, pokemon ->
-            val id = offset + index + 1
-            val imageUrl = PokemonUtils.getPokemonImageUrl(id) // Função para obter a URL da imagem
-            PokemonDTO(
-                id, pokemon.name, imageUrl
-            )
-        }
-        return pokemonList
-    }
-
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokemonDTO> {
         try {
 
@@ -36,12 +17,22 @@ class PokemonPagingSource(private val pokemonApi: PokemonAPI, private val query:
             val pageNumber = params.key ?: 0
             val offset = pageNumber * params.loadSize
 
-            val pokemonList = getAllPaginado(params.loadSize, offset)
+            val response = pokemonApi.getPokemonList(params.loadSize, offset)
+            Log.e(TAG, "load: ${response.results.size}")
+
+            val pokemonList = response.results.mapIndexed { index, pokemon ->
+                val id = offset + index + 1
+                val imageUrl =
+                    PokemonUtils.getPokemonImageUrl(id) // Função para obter a URL da imagem
+                PokemonDTO(
+                    id, pokemon.name, imageUrl
+                )
+            }
 
             return LoadResult.Page(
                 data = pokemonList,
                 prevKey = if (pageNumber == 0) null else pageNumber - 1,
-                nextKey = if (pokemonList.isEmpty()) null else pageNumber + 1
+                nextKey = if (response.results.isEmpty()) null else pageNumber + 1
             )
         } catch (e: Exception) {
             Log.e(TAG, "load: Error: ${e.message}")

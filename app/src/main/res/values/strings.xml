@@ -3,4 +3,7 @@
     <string name="click_me">Clique Aqui</string>
     <string name="string_chip_1" translatable="false">Chip 1</string>
     <string name="string_chip_2" translatable="false">Chip 2</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="pokemon" translatable="false">Pokemon</string>
+    <string name="tipo">Tipo</string>
 </resources>
