@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@{myViewModel.texto}" />
+            android:text="@{myViewModel.text}" />
     </LinearLayout>
 
 </layout>

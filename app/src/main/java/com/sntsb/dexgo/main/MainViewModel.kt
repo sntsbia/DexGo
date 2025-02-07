@@ -3,10 +3,20 @@ package com.sntsb.dexgo.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.sntsb.dexgo.pokemon.repository.PokemonRepository
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
+//@HiltViewModel
+//class MainViewModel @Inject constructor(private val repository: PokemonRepository): ViewModel() {
+class MainViewModel(private val repository: PokemonRepository = PokemonRepository()) :
+    ViewModel() {
 
-    private val _texto = MutableLiveData("Olá, mundo!")
-    val texto: LiveData<String> = _texto
+    private val _text = MutableLiveData("Olá, mundo!")
+
+    val text: LiveData<String> = _text
+
+    fun setText() {
+        _text.value = repository.getPokemonList()
+    }
 
 }
