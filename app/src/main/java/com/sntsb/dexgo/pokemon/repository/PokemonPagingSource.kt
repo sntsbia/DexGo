@@ -31,7 +31,9 @@ class PokemonPagingSource(private val pokemonApi: PokemonAPI, private val query:
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokemonDTO> {
         try {
 
-            Log.e(TAG, "load: $params")
+            Log.e(TAG, "load: key: ${params.key}")
+            Log.e(TAG, "load: loadSize: ${params.loadSize}")
+            Log.e(TAG, "load: query: ${query}")
 
             val pageNumber = params.key ?: 0
             val offset = pageNumber * params.loadSize
@@ -51,7 +53,10 @@ class PokemonPagingSource(private val pokemonApi: PokemonAPI, private val query:
     }
 
     override fun getRefreshKey(state: PagingState<Int, PokemonDTO>): Int? {
-        return state.anchorPosition
+        return state.anchorPosition?.let { anchorPosition ->
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
+        }
     }
 
     companion object {

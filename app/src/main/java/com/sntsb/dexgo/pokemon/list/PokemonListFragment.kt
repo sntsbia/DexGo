@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -33,10 +32,15 @@ class PokemonListFragment : Fragment() {
 
         mPokemonListViewModel = ViewModelProvider(this)[PokemonListViewModel::class.java]
 
-        initView()
+        initObservers()
+
+        initViews()
 
         binding.progressbar.visibility = View.GONE
 
+    }
+
+    private fun initObservers() {
         lifecycleScope.launch {
             mPokemonListViewModel.searchQuery.observe(viewLifecycleOwner) { query ->
                 Log.e(TAG, "onViewCreated: $query")
@@ -44,56 +48,46 @@ class PokemonListFragment : Fragment() {
             }
 
             mPokemonListViewModel.pokemonPager.collectLatest { pagingData ->
-                Log.e(TAG, "onViewCreated: ################# ${pagingData}")
-                binding.progressbar.visibility = View.VISIBLE
 
                 pokemonAdapter.submitData(pagingData)
 
+                binding.swipeRefreshLayout.isRefreshing = false
+
                 binding.progressbar.visibility = View.GONE
+
             }
+        }
+    }
+
+    private fun initViews() {
+        binding.rvPokemons.adapter = pokemonAdapter
+        binding.rvPokemons.layoutManager = LinearLayoutManager(requireContext())
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+
+            mPokemonListViewModel.refreshPokemonList()
+            binding.rvPokemons.scrollToPosition(0)
+
+            binding.swipeRefreshLayout.isRefreshing = false
         }
 
         binding.radioGroup.setOnCheckedChangeListener { _, id ->
             when (id) {
                 binding.radioPokemon.id -> {
-                    binding.tilSearch.visibility = View.VISIBLE
+                    binding.llSearch.visibility = View.VISIBLE
                     binding.tilDdSearch.visibility = View.GONE
                 }
 
                 binding.radioTipo.id -> {
-                    binding.tilSearch.visibility = View.GONE
+                    binding.llSearch.visibility = View.GONE
                     binding.tilDdSearch.visibility = View.VISIBLE
                 }
             }
         }
-    }
 
-    private fun initView() {
-
-        binding.rvPokemons.adapter = pokemonAdapter
-        binding.rvPokemons.layoutManager = LinearLayoutManager(requireContext())
-
-        initTextWatcher()
-
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            binding.progressbar.visibility = View.VISIBLE
-
-            mPokemonListViewModel.refreshPokemonList()
-
-            binding.swipeRefreshLayout.isRefreshing = false
-            binding.progressbar.visibility = View.GONE
-        }
-
-    }
-
-    private fun initTextWatcher() {
-
-        binding.txtSearch.addTextChangedListener {
-            mPokemonListViewModel.setSearchQuery(
-                StringUtils.allLowercase(
-                    it?.trim()?.toString() ?: ""
-                )
-            )
+        binding.btnSearch.setOnClickListener {
+            val query = binding.txtSearch.text.toString()
+            mPokemonListViewModel.setSearchQuery(StringUtils.allLowercase(query))
         }
     }
 

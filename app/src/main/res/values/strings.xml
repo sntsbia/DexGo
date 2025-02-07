@@ -5,5 +5,6 @@
     <string name="string_chip_2" translatable="false">Chip 2</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="pokemon" translatable="false">Pokemon</string>
-    <string name="tipo">Tipo</string>
+    <string name="type">Tipo</string>
+    <string name="search">Pesquisar</string>
 </resources>
