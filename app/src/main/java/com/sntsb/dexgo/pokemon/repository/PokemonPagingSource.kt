@@ -15,10 +15,6 @@ class PokemonPagingSource(private val pokemonApi: PokemonAPI, private val params
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokemonDTO> {
         try {
 
-            Log.e(TAG, "load: key: ${params.key}")
-            Log.e(TAG, "load: loadSize: ${params.loadSize}")
-            Log.e(TAG, "load: query: ${this.params.filter}")
-
             val pageNumber = params.key ?: 0
             val offset = pageNumber * params.loadSize
 
@@ -48,7 +44,6 @@ class PokemonPagingSource(private val pokemonApi: PokemonAPI, private val params
 
             } else {
                 val response = pokemonApi.getPokemonList(params.loadSize, offset)
-                Log.e(TAG, "load: ${response.results.size}")
 
                 response.results.mapIndexed { index, pokemon ->
 
@@ -72,7 +67,7 @@ class PokemonPagingSource(private val pokemonApi: PokemonAPI, private val params
                 }
             }
 
-            Log.e(TAG, "load: ${pokemonList.size}")
+
             return LoadResult.Page(
                 data = pokemonList, prevKey = if (pokemonList.size > 1) {
                     if (pageNumber == 0) null else pageNumber - 1

@@ -13,13 +13,10 @@ class TypePagingSource(private val pokemonApi: PokemonAPI, private val query: St
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokemonDTO> {
         try {
 
-            Log.e(TAG, "load: $params")
-
             val pageNumber = params.key ?: 0
             val offset = pageNumber * params.loadSize
 
             val response = pokemonApi.getPokemonList(params.loadSize, offset)
-            Log.e(TAG, "load: ${response.results.size}")
 
             val pokemonList = response.results.mapIndexed { index, pokemon ->
                 val id = offset + index + 1

@@ -7,12 +7,7 @@ import com.sntsb.dexgo.type.enums.TypeEnum
 
 class UiUtils(val context: Context) {
 
-    companion object {
-        private const val TAG = "UiUtils"
-    }
-
     fun getStatusLabel(status: String): String {
-        Log.e(TAG, "getStatusLabel: $status")
         return when (status) {
             "hp" -> context.resources.getString(R.string.hp)
             "attack" -> context.resources.getString(R.string.attack)

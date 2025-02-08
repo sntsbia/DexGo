@@ -65,7 +65,6 @@ class PokemonDetailActivity : AppCompatActivity() {
             }
 
             viewModel.pokemon.observe(this@PokemonDetailActivity) { pokemon ->
-                Log.e(TAG, "onCreate: $pokemon")
                 if (pokemon != null) {
 
                     initData(pokemon)
@@ -100,7 +99,6 @@ class PokemonDetailActivity : AppCompatActivity() {
 
     private fun initData(pokemon: PokemonStatisticDTO) {
         with(binding) {
-            Log.e(TAG, "initDados: $pokemon")
             tvDetails.text = StringUtils.capitalizeFirstLetter(pokemon.name)
             tvId.text = buildString { append(pokemon.id) }
 

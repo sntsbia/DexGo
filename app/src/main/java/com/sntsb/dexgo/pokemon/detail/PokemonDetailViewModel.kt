@@ -35,12 +35,10 @@ class PokemonDetailViewModel @Inject constructor(private val repository: Pokemon
     }
 
     fun getPokemon(id: String) = viewModelScope.launch {
-        Log.e(TAG, "getPokemon: $id")
 
         _isLoading.value = (true)
 
         val pokemon = repository.getOne(id)
-        Log.e(TAG, "getPokemon: $pokemon")
         _pokemon.value = pokemon
 
         _isLoading.value = (false)

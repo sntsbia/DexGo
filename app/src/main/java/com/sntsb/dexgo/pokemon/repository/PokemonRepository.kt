@@ -45,8 +45,6 @@ class PokemonRepository @Inject constructor(private val pokemonApi: PokemonAPI) 
 
             return response?.let { pokemon ->
 
-                Log.e(TAG, "getOne: $pokemon")
-
                 val statisticDTOList = pokemon.statisticList.map { stat ->
                     StatisticDTO(stat.stat.name, stat.valorBase)
                 }

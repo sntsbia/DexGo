@@ -36,7 +36,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginHorizontal="4dp"
+                android:layout_marginHorizontal="@dimen/padding"
                 android:gravity="center_vertical"
                 app:layout_constraintBottom_toBottomOf="@id/iv_pokemon"
                 app:layout_constraintEnd_toEndOf="parent"
