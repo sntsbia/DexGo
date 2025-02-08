@@ -46,10 +46,10 @@ class ItemPokemonAdapter(private val mContext: Context) :
             Glide.with(databinding.root).load(pokemon.image).into(databinding.ivPokemon)
 
             if (pokemon.typeList.isNotEmpty()) {
-                pokemon.typeList.firstOrNull()?.let { tipo ->
+                pokemon.typeList.firstOrNull()?.let { type ->
                     databinding.cvItemPokemon.backgroundTintList = ContextCompat.getColorStateList(
                         context, UiUtils(context).getTypeColor(
-                            TypeEnum.from(tipo.description)
+                            TypeEnum.from(type.description)
                         )
                     )
                 }

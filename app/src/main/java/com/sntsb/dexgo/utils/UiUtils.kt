@@ -51,8 +51,8 @@ class UiUtils(val context: Context) {
         }
     }
 
-    fun getTipoLabel(tipo: TypeEnum): String {
-        when (tipo) {
+    fun getTypeLabel(type: TypeEnum): String {
+        when (type) {
             TypeEnum.normal -> return context.resources.getString(R.string.normal)
             TypeEnum.fighting -> return context.resources.getString(R.string.fighting)
             TypeEnum.flying -> return context.resources.getString(R.string.flying)
@@ -77,8 +77,8 @@ class UiUtils(val context: Context) {
         }
     }
 
-    fun getTypeColor(tipo: TypeEnum): Int {
-        when (tipo) {
+    fun getTypeColor(type: TypeEnum): Int {
+        when (type) {
             TypeEnum.normal -> return R.color.color_normal
             TypeEnum.fighting -> return R.color.color_fighting
             TypeEnum.flying -> return R.color.color_flying

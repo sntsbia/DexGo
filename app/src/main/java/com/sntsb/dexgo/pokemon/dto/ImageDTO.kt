@@ -5,9 +5,8 @@ data class ImageDTO(
 ) {
 
     companion object {
-        const val IMAGEM_FRONT = "front"
-        const val IMAGEM_SHINY = "shiny"
-
+        const val FRONT_IMAGE = "front"
+        const val SHINY_IMAGE = "shiny"
     }
 
     override fun toString(): String {

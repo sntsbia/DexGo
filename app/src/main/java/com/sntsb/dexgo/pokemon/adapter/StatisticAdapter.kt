@@ -14,10 +14,10 @@ class StatisticAdapter(private val statisticDTOList: List<StatisticDTO>, val con
     inner class StatisticItemViewHolder(private val databinding: ItemStatisticBinding) :
         RecyclerView.ViewHolder(databinding.root) {
 
-        fun bind(tipo: StatisticDTO) {
-            databinding.statusItemDataBinding = tipo
-            databinding.tvStatistic.text = UiUtils(context).getStatusLabel(tipo.description)
-            databinding.tvValue.text = buildString { append(tipo.value) }
+        fun bind(type: StatisticDTO) {
+            databinding.statusItemDataBinding = type
+            databinding.tvStatistic.text = UiUtils(context).getStatusLabel(type.description)
+            databinding.tvValue.text = buildString { append(type.value) }
         }
     }
 

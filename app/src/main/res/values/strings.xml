@@ -46,5 +46,6 @@
     <string name="fairy">Fada</string>
     <string name="shadow">Sombra</string>
     <string name="empty_list">Sem Informações</string>
+    <string name="clear">Limpar</string>
 
 </resources>

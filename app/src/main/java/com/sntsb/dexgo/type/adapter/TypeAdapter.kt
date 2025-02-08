@@ -14,10 +14,10 @@ class TypeAdapter(private val typeDTOList: List<TypeDTO>, val context: Context) 
     inner class TypeItemViewHolder(private val databinding: ItemTypeBinding) :
         RecyclerView.ViewHolder(databinding.root) {
 
-        fun bind(tipo: TypeDTO) {
-            databinding.typeItemDataBinding = tipo
+        fun bind(type: TypeDTO) {
+            databinding.typeItemDataBinding = type
 
-            Glide.with(databinding.root).load(tipo.image).into(databinding.ivType)
+            Glide.with(databinding.root).load(type.image).into(databinding.ivType)
 
         }
 

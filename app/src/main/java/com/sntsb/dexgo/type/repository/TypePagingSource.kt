@@ -30,11 +30,11 @@ class TypePagingSource(private val pokemonApi: PokemonAPI, private val query: St
                     pokemon.name,
                     imageUrl,
                     pokemonDetalhesDTO?.typeList?.map { typeResponse ->
-                        val idTipo = typeResponse.type.url.split("/").let { it[it.size - 2] }
-                        val imagem = PokemonUtils.getPokemonTypeImageUrl(idTipo.toIntOrNull() ?: -1)
+                        val idType = typeResponse.type.url.split("/").let { it[it.size - 2] }
+                        val image = PokemonUtils.getPokemonTypeImageUrl(idType.toIntOrNull() ?: -1)
 
                         TypeDTO(
-                            idTipo.toIntOrNull() ?: -1, typeResponse.type.name, imagem
+                            idType.toIntOrNull() ?: -1, typeResponse.type.name, image
                         )
                     } ?: emptyList())
             }

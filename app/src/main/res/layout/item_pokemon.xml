@@ -18,28 +18,33 @@
         app:cardCornerRadius="5dp"
         app:strokeWidth="1dp">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
             android:padding="8dp">
 
             <ImageView
                 android:id="@+id/iv_pokemon"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/ic_pokeball_36" />
+                android:contentDescription="@string/pokemon_image"
+                android:src="@drawable/ic_pokeball_36"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_nome_pokemon"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginHorizontal="8dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical" />
-
-        </LinearLayout>
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@id/iv_pokemon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_pokemon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.8" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

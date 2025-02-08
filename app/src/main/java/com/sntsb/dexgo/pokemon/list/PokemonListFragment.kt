@@ -1,7 +1,7 @@
 package com.sntsb.dexgo.pokemon.list
 
+import android.R
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.sntsb.dexgo.databinding.FragmentPokemonListBinding
 import com.sntsb.dexgo.pokemon.adapter.ItemPokemonAdapter
 import com.sntsb.dexgo.type.adapter.TypeDropdownAdapter
-import com.sntsb.dexgo.type.enums.TypeEnum
 import com.sntsb.dexgo.utils.StringUtils
-import com.sntsb.dexgo.utils.UiUtils
 import com.sntsb.dexgo.utils.adapter.LoadStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -36,11 +34,9 @@ class PokemonListFragment : Fragment() {
 
         mPokemonListViewModel = ViewModelProvider(this)[PokemonListViewModel::class.java]
 
-        pokemonAdapter = ItemPokemonAdapter(requireContext())
+        initViews()
 
         initObservers()
-
-        initViews()
 
         mPokemonListViewModel.setQueryString("")
 
@@ -49,19 +45,40 @@ class PokemonListFragment : Fragment() {
     }
 
     private fun initObservers() {
-        lifecycleScope.launch {
+        mPokemonListViewModel.loading.observe(viewLifecycleOwner) { loading ->
+            setLoading(loading)
+        }
 
-            mPokemonListViewModel.loading.observe(viewLifecycleOwner) { loading ->
-                setLoading(loading)
-            }
-
-            mPokemonListViewModel.pagingData.observe(viewLifecycleOwner) { pagingData ->
+        mPokemonListViewModel.pagingDataByPokemon.observe(viewLifecycleOwner) { pagingData ->
+            if (binding.radioGroup.checkedRadioButtonId == binding.radioPokemon.id || binding.ddSearch.text.isNullOrEmpty()) {
                 pokemonAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
             }
+        }
+        mPokemonListViewModel.pagingDataByType.observe(viewLifecycleOwner) { pagingData ->
+            if (binding.radioGroup.checkedRadioButtonId == binding.radioType.id && !binding.ddSearch.text.isNullOrEmpty()) {
+                pokemonAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
+            }
+        }
+
+        mPokemonListViewModel.types.observe(viewLifecycleOwner) { types ->
+            typeAdapter = TypeDropdownAdapter(
+                requireContext(), types, R.layout.simple_spinner_dropdown_item
+            )
+            binding.ddSearch.setAdapter(typeAdapter)
+
+            binding.ddSearch.setOnItemClickListener { parent, view, position, id ->
+                val type = typeAdapter.getItem(position)
+                mPokemonListViewModel.setByType(type.id.toString())
+                binding.btnClear.visibility = View.VISIBLE
+            }
+        }
+
+        lifecycleScope.launch {
 
             pokemonAdapter.loadStateFlow.collectLatest { loadStates ->
                 mPokemonListViewModel.setLoading(loadStates.refresh is LoadState.Loading)
             }
+
         }
     }
 
@@ -71,8 +88,6 @@ class PokemonListFragment : Fragment() {
 
     private fun initViews() {
 
-        initDropdown()
-
         initAdapter()
 
         initListener()
@@ -80,6 +95,8 @@ class PokemonListFragment : Fragment() {
     }
 
     private fun initAdapter() {
+
+        pokemonAdapter = ItemPokemonAdapter(requireContext())
 
         binding.rvPokemons.adapter =
             pokemonAdapter.withLoadStateFooter(footer = LoadStateAdapter(object :
@@ -89,34 +106,6 @@ class PokemonListFragment : Fragment() {
                 }
             }))
         binding.rvPokemons.layoutManager = GridLayoutManager(requireContext(), 2)
-
-    }
-
-    private fun initDropdown() {
-
-        val tipos = TypeEnum.entries.map {
-            UiUtils(requireContext()).getTipoLabel(it)
-        }.toList().let {
-            ArrayList(it)
-        }
-
-        tipos.sort()
-
-        typeAdapter = TypeDropdownAdapter(
-            requireContext(),
-            tipos,
-            com.google.android.material.R.layout.support_simple_spinner_dropdown_item
-        )
-        binding.ddSearch.setAdapter(typeAdapter)
-        typeAdapter.notifyDataSetChanged()
-
-        binding.ddSearch.setOnItemClickListener { parent, view, position, id ->
-            val tipo = typeAdapter.getItem(position)
-
-            Log.e(TAG, "initDropdown: $tipo")
-
-
-        }
 
     }
 
@@ -138,20 +127,18 @@ class PokemonListFragment : Fragment() {
 
             mPokemonListViewModel.setQueryString("")
             binding.rvPokemons.layoutManager?.scrollToPosition(0)
-
-            binding.swipeRefreshLayout.isRefreshing = false
         }
 
         binding.radioGroup.setOnCheckedChangeListener { _, id ->
             when (id) {
                 binding.radioPokemon.id -> {
                     binding.llSearch.visibility = View.VISIBLE
-                    binding.tilDdSearch.visibility = View.GONE
+                    binding.llDdSearch.visibility = View.GONE
                 }
 
-                binding.radioTipo.id -> {
+                binding.radioType.id -> {
                     binding.llSearch.visibility = View.GONE
-                    binding.tilDdSearch.visibility = View.VISIBLE
+                    binding.llDdSearch.visibility = View.VISIBLE
                 }
             }
         }
@@ -161,6 +148,17 @@ class PokemonListFragment : Fragment() {
             if (mPokemonListViewModel.searchQuery.value != query) {
                 mPokemonListViewModel.setQueryString(StringUtils.allLowercase(query))
             }
+        }
+
+        binding.tilSearch.setEndIconOnClickListener {
+            binding.txtSearch.setText("")
+            mPokemonListViewModel.setQueryString("")
+        }
+
+        binding.btnClear.setOnClickListener {
+            binding.ddSearch.setText("")
+            binding.btnClear.visibility = View.GONE
+            mPokemonListViewModel.setByType("")
         }
     }
 

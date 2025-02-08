@@ -1,79 +1,86 @@
 package com.sntsb.dexgo.type.repository
 
 import android.util.Log
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import com.sntsb.dexgo.paging.model.PagingParams
 import com.sntsb.dexgo.pokemon.api.PokemonAPI
-import com.sntsb.dexgo.pokemon.dto.ImageDTO
 import com.sntsb.dexgo.pokemon.dto.PokemonDTO
-import com.sntsb.dexgo.pokemon.dto.PokemonStatisticDTO
-import com.sntsb.dexgo.pokemon.dto.StatisticDTO
-import com.sntsb.dexgo.pokemon.repository.PokemonPagingSource
 import com.sntsb.dexgo.type.dto.TypeDTO
 import com.sntsb.dexgo.utils.PokemonUtils
 import javax.inject.Inject
 
-class TypeRepository @Inject constructor(private val pokemonApi: PokemonAPI) {
+class TypeRepository @Inject constructor(
+    private val pokemonAPI: PokemonAPI
+) {
 
-    val pagingSource = fun(query: String): Pager<Int, PokemonDTO> {
+    suspend fun getTypes(): ArrayList<TypeDTO> {
+        val types = ArrayList<TypeDTO>()
 
-        return Pager(config = PagingConfig(pageSize = 20, enablePlaceholders = false),
-            pagingSourceFactory = {
-                PokemonPagingSource(pokemonApi, PagingParams(query))
-            })
+        try {
+
+            val response = pokemonAPI.getTypes()
+
+            response.let { resposta ->
+                resposta.results.forEach { type ->
+                    val id = type.url.split("/").let { it[it.size - 2] }
+                    val image = PokemonUtils.getPokemonTypeImageUrl(id.toIntOrNull() ?: -1)
+                    types.add(TypeDTO(id.toIntOrNull() ?: -1, type.name, image))
+                }
+            }
+
+        } catch (e: Exception) {
+            Log.e(TAG, "getTypes: Error: ${e.message}")
+            e.printStackTrace()
+        }
+
+        return types
 
     }
 
-    suspend fun getOne(id: String): PokemonStatisticDTO? {
+
+    suspend fun getByType(id: String): ArrayList<PokemonDTO> {
         try {
 
-            val response = pokemonApi.getPokemonById(id)
+            val response = pokemonAPI.getTypeById(id)
 
-            return response?.let { pokemon ->
+            val pokemons = ArrayList<PokemonDTO>()
 
-                Log.e(TAG, "getOne: ${pokemon}")
+            response?.let { type ->
 
-                val status = pokemon.statisticList.map { stat ->
-                    StatisticDTO(stat.stat.name, stat.valorBase)
+                type.pokemon.forEach { pokemonTypeResponse ->
+
+                    val pokemon =
+                        pokemonAPI.getPokemonById(pokemonTypeResponse.pokemon.url.split("/")
+                            .let { it[it.size - 2] })
+
+                    if (pokemon != null) {
+
+                        val types = pokemon.typeList.map { type ->
+
+                            val idType = type.type.url.split("/").let { it[it.size - 2] }
+                            val image =
+                                PokemonUtils.getPokemonTypeImageUrl(idType.toIntOrNull() ?: -1)
+                            TypeDTO(
+                                idType.toIntOrNull() ?: -1, type.type.name, image
+                            )
+                        }
+
+                        pokemons.add(
+                            PokemonDTO(
+                                pokemon.id,
+                                pokemon.name,
+                                PokemonUtils.getPokemonImageUrl(pokemon.id),
+                                types
+                            )
+                        )
+                    }
                 }
-
-                val tipos = pokemon.typeList.map { type ->
-
-                    val idTipo = type.type.url.split("/").let { it[it.size - 2] }
-                    val imagem = PokemonUtils.getPokemonTypeImageUrl(idTipo.toIntOrNull() ?: -1)
-                    TypeDTO(
-                        idTipo.toIntOrNull() ?: -1, type.type.name, imagem
-                    )
-                }
-
-                val imagemArray = ArrayList<ImageDTO>()
-                imagemArray.add(
-                    ImageDTO(
-                        ImageDTO.IMAGEM_FRONT, PokemonUtils.getPokemonImageUrl(pokemon.id)
-                    )
-                )
-                imagemArray.add(
-                    ImageDTO(
-                        ImageDTO.IMAGEM_SHINY, PokemonUtils.getPokemonShinyImageUrl(pokemon.id)
-                    )
-                )
-
-                PokemonStatisticDTO(
-                    pokemon.id,
-                    pokemon.name,
-                    imagemArray,
-                    pokemon.height,
-                    pokemon.weight,
-                    tipos,
-                    status
-                )
             }
+
+            return pokemons
 
         } catch (e: Exception) {
             Log.e(TAG, "getOne: Error: ${e.message}")
             e.printStackTrace()
-            return null
+            return arrayListOf()
 
         }
 

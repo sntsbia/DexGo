@@ -30,6 +30,14 @@ class PokemonRepository @Inject constructor(private val pokemonApi: PokemonAPI) 
             pagingSourceFactory = { getPagingSource(filtro) }).flow
     }
 
+    fun getPokemonByTypePager(
+        itemList: List<PokemonDTO>, pageSize: Int = PokemonAPI.LIMIT
+    ): Pager<Int, PokemonDTO> {
+        return Pager(config = PagingConfig(
+            pageSize = pageSize, enablePlaceholders = false
+        ), pagingSourceFactory = { PokemonByTypePagingSource(itemList) })
+    }
+
     suspend fun getOne(id: String): PokemonStatisticDTO? {
         try {
 
@@ -55,12 +63,12 @@ class PokemonRepository @Inject constructor(private val pokemonApi: PokemonAPI) 
                 val imageArray = ArrayList<ImageDTO>()
                 imageArray.add(
                     ImageDTO(
-                        ImageDTO.IMAGEM_FRONT, PokemonUtils.getPokemonImageUrl(pokemon.id)
+                        ImageDTO.FRONT_IMAGE, PokemonUtils.getPokemonImageUrl(pokemon.id)
                     )
                 )
                 imageArray.add(
                     ImageDTO(
-                        ImageDTO.IMAGEM_SHINY, PokemonUtils.getPokemonShinyImageUrl(pokemon.id)
+                        ImageDTO.SHINY_IMAGE, PokemonUtils.getPokemonShinyImageUrl(pokemon.id)
                     )
                 )
 
