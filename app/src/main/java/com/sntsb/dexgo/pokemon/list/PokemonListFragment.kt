@@ -10,12 +10,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.sntsb.dexgo.R
 import com.sntsb.dexgo.databinding.FragmentPokemonListBinding
 import com.sntsb.dexgo.pokemon.adapter.ItemPokemonAdapter
 import com.sntsb.dexgo.type.adapter.TypeDropdownAdapter
 import com.sntsb.dexgo.utils.StringUtils
 import com.sntsb.dexgo.utils.adapter.LoadStateAdapter
+import com.sntsb.dexgo.utils.network.NetworkMonitor
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -27,6 +29,8 @@ class PokemonListFragment : Fragment() {
 
     private lateinit var mPokemonListViewModel: PokemonListViewModel
 
+    private lateinit var networkMonitor: NetworkMonitor
+
     private lateinit var pokemonAdapter: ItemPokemonAdapter
     private lateinit var typeAdapter: TypeDropdownAdapter
 
@@ -34,6 +38,8 @@ class PokemonListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mPokemonListViewModel = ViewModelProvider(this)[PokemonListViewModel::class.java]
+
+        networkMonitor = NetworkMonitor(requireContext())
 
         initViews()
 
@@ -46,6 +52,12 @@ class PokemonListFragment : Fragment() {
     }
 
     private fun initObservers() {
+        networkMonitor.online.observe(viewLifecycleOwner) { online ->
+            if (online) {
+                mPokemonListViewModel.setQueryString("")
+            }
+        }
+
         mPokemonListViewModel.loading.observe(viewLifecycleOwner) { loading ->
             setLoading(loading)
         }
@@ -97,7 +109,14 @@ class PokemonListFragment : Fragment() {
 
     private fun initAdapter() {
 
-        pokemonAdapter = ItemPokemonAdapter(requireContext())
+        pokemonAdapter =
+            ItemPokemonAdapter(requireContext(), object : ItemPokemonAdapter.OnSnackbar {
+                override fun showSnackbar(message: String) {
+                    Snackbar.make(
+                        binding.viewSnackbar, message, Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            })
 
         binding.rvPokemons.adapter =
             pokemonAdapter.withLoadStateFooter(footer = LoadStateAdapter(object :
@@ -165,6 +184,16 @@ class PokemonListFragment : Fragment() {
             binding.btnClear.visibility = View.GONE
             mPokemonListViewModel.setByType("")
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        networkMonitor.addNetworkListener()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        networkMonitor.removeNetworkListener()
     }
 
     override fun onCreateView(

@@ -9,16 +9,22 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.sntsb.dexgo.R
 import com.sntsb.dexgo.databinding.ItemPokemonBinding
 import com.sntsb.dexgo.pokemon.detail.PokemonDetailActivity
 import com.sntsb.dexgo.pokemon.dto.PokemonDTO
 import com.sntsb.dexgo.type.enums.TypeEnum
 import com.sntsb.dexgo.utils.StringUtils
 import com.sntsb.dexgo.utils.UiUtils
+import com.sntsb.dexgo.utils.network.NetworkUtil
 
-class ItemPokemonAdapter(private val mContext: Context) :
+class ItemPokemonAdapter(private val mContext: Context, private val onSnackbar: OnSnackbar) :
     PagingDataAdapter<PokemonDTO, ItemPokemonAdapter.PokemonViewHolder>(POKEMON_COMPARATOR) {
     private val context = mContext
+
+    interface OnSnackbar {
+        fun showSnackbar(message: String)
+    }
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         val pokemon = getItem(position)
@@ -42,9 +48,9 @@ class ItemPokemonAdapter(private val mContext: Context) :
         fun bind(pokemon: PokemonDTO) {
             databinding.pokemonItemDataBinding = pokemon
             databinding.tvNomePokemon.text = StringUtils.capitalizeFirstLetter(pokemon.name)
-
-            Glide.with(databinding.root).load(pokemon.image).into(databinding.ivPokemon)
-
+            if (NetworkUtil.isNetworkAvailable(context)) {
+                Glide.with(databinding.root).load(pokemon.image).into(databinding.ivPokemon)
+            }
             if (pokemon.typeList.isNotEmpty()) {
                 pokemon.typeList.firstOrNull()?.let { type ->
                     databinding.cvItemPokemon.backgroundTintList = ContextCompat.getColorStateList(
@@ -56,10 +62,16 @@ class ItemPokemonAdapter(private val mContext: Context) :
             }
 
             databinding.cvItemPokemon.setOnClickListener {
+                if (NetworkUtil.isNetworkAvailable(context)) {
+                    mContext.startActivity(Intent(
+                        context, PokemonDetailActivity::class.java
+                    ).apply {
+                        putExtra(PokemonDetailActivity.POKEMON_ID, pokemon.id)
+                    })
+                } else {
+                    onSnackbar.showSnackbar(context.getString(R.string.info_no_connection))
 
-                mContext.startActivity(Intent(context, PokemonDetailActivity::class.java).apply {
-                    putExtra(PokemonDetailActivity.POKEMON_ID, pokemon.id)
-                })
+                }
             }
 
         }

@@ -52,4 +52,9 @@
     <string name="type_search">Pesquisar por tipo</string>
     <string name="name_id_search">Pesquisar por nome ou ID</string>
 
+    <string name="connection_re_established">Conexão restaurada</string>
+    <string name="no_connection">Sem conexão</string>
+    <string name="info_no_connection">Ops! Parece que você está offline. Conecte-se à internet para acessar as informações</string>
+
+
 </resources>

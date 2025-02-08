@@ -48,4 +48,8 @@
 
     <string name="type_search">Search by type</string>
     <string name="name_id_search">Search by name or ID</string>
+
+    <string name="connection_re_established">Connection re-established</string>
+    <string name="no_connection">No connection</string>
+    <string name="info_no_connection">Oops! You\'re offline. Connect to the internet to access the information.</string>
 </resources>
