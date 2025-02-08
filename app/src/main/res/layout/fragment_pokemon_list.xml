@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="8dp">
 
                 <LinearLayout
                     android:id="@+id/ll_dd_search"
@@ -52,6 +52,7 @@
                             style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:hint="@string/type_search"
                             android:inputType="text"
                             android:textAppearance="?attr/textAppearanceBody2" />
 
@@ -62,7 +63,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:backgroundTint="#00FFFFFF"
+                        android:backgroundTint="@color/color_transparent"
                         android:contentDescription="@string/clear"
                         android:src="@drawable/ic_baseline_close_24"
                         android:visibility="gone" />
@@ -90,8 +91,8 @@
                             style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:hint="@string/name_id_search"
                             android:inputType="text"
-                            android:text=""
                             android:textAppearance="?attr/textAppearanceBody2" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -101,7 +102,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:backgroundTint="#00FFFFFF"
+                        android:backgroundTint="@color/color_transparent"
                         android:contentDescription="@string/search"
                         android:src="@drawable/ic_baseline_search_24" />
                 </LinearLayout>

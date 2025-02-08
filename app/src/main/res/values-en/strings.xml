@@ -42,5 +42,10 @@
     <string name="fairy">Fairy</string>
     <string name="shadow">Shadow</string>
 
+    <string name="clear">Clear</string>
+
     <string name="empty_list">Empty List</string>
+
+    <string name="type_search">Search by type</string>
+    <string name="name_id_search">Search by name or ID</string>
 </resources>

@@ -3,106 +3,36 @@
 
     <style name="Theme.DexGo" parent="Theme.Material3.DayNight">
 
-        <item name="backgroundColor">@color/color_base</item>
+        <item name="backgroundColor">@color/color_background</item>
+        <item name="android:statusBarColor">@color/color_background</item>
+        <item name="android:windowLightStatusBar">true</item>
         <item name="colorOnPrimary">@color/color_text</item>
-        <item name="android:statusBarColor">@color/color_secondary</item>
 
-        <item name="colorPrimary">@color/color_title</item>
-        <item name="colorSecondary">@color/color_secondary</item>
-        <item name="colorOnSecondary">@color/color_normal</item>
+        <item name="colorPrimary">@color/color_blue_secondary</item>
+        <!--  Secondary brand color.  -->
+        <item name="colorSecondary">@color/color_purple_secondary</item>
+        <item name="colorOnSecondary">@color/color_text</item>
 
-        <item name="chipGroupStyle">@style/Widget.App.Chip.ChipGroup</item>
-        <item name="chipStyle">@style/Widget.App.Chip</item>
-
-    </style>
-
-    <style name="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-        <item name="errorIconTint">@color/design_default_color_error</item>
-        <item name="errorTextColor">@color/design_default_color_error</item>
-        <item name="boxStrokeErrorColor">@color/design_default_color_error</item>
-        <item name="hintTextColor">@color/design_default_color_primary_dark</item>
-        <item name="strokeColor">@color/black</item>
-        <item name="boxStrokeColor">@color/black</item>
-        <item name="boxStrokeWidth">2dp</item>
-        <item name="android:strokeColor">@color/black</item>
+        <item name="textInputOutlinedStyle">@style/MyTextInputLayoutOutlinedBox</item>
+        <item name="textInputStyle">@style/MyTextInputLayoutOutlinedBox</item>
+        <item name="materialCardViewStyle">@style/MyMaterialCardView</item>
 
     </style>
 
-    <style name="Widget.Material3.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="errorIconTint">@color/design_default_color_error</item>
-        <item name="errorTextColor">@color/design_default_color_error</item>
-        <item name="boxStrokeErrorColor">@color/design_default_color_error</item>
-        <item name="hintTextColor">@color/design_default_color_primary_dark</item>
-        <item name="strokeColor">@color/black</item>
-        <item name="boxStrokeColor">@color/black</item>
-        <item name="boxStrokeWidth">2dp</item>
+    <style name="MyTextInputLayoutOutlinedBox" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/color_text</item>
+        <item name="errorTextColor">@color/color_error</item>
+        <item name="endIconTint">@color/color_text</item>
+        <item name="startIconTint">@color/color_text</item>
 
-        <item name="android:strokeColor">@color/black</item>
+        <item name="errorIconTint">@color/color_error</item>
     </style>
 
-    <style name="Widget.App.MaterialToolbar" parent="Widget.Design.TabLayout">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:backgroundTintMode">add</item>
-        <item name="android:backgroundTint">@color/color_base</item>
-        <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="tabIndicatorColor">@color/design_default_color_primary_dark</item>
-        <item name="tabTextColor">@color/color_title</item>
-        <item name="tabIconTint">@color/design_default_color_primary_dark</item>
-    </style>
-
-    <style name="Widget.App.Chip" parent="Widget.MaterialComponents.Chip.Filter">
-        <item name="checkedIconTint">@color/material_on_surface_emphasis_medium</item>
-        <item name="chipBackgroundColor">@color/material_dynamic_neutral0</item>
-        <item name="backgroundTint">@color/material_dynamic_neutral_variant40</item>
-        <item name="closeIconTint">@color/material_on_background_emphasis_high_type</item>
-        <item name="colorOnSurface">@color/material_dynamic_primary70</item>
-        <item name="android:textColor">@color/material_dynamic_secondary30</item>
-        <item name="chipStrokeWidth">1dp</item>
-        <item name="chipStrokeColor">@color/material_dynamic_primary50</item>
-    </style>
-
-    <style name="Widget.App.ChipItem" parent="Widget.Material3.Chip.Filter">
-        <item name="checkedIconTint">@color/material_on_surface_emphasis_medium</item>
-        <item name="chipBackgroundColor">@color/material_on_background_emphasis_high_type</item>
-        <item name="android:backgroundTint">@color/material_dynamic_secondary30</item>
-        <item name="closeIconTint">@color/material_on_surface_emphasis_medium</item>
-        <item name="colorOnSurface">@color/material_dynamic_secondary30</item>
-        <item name="android:textColor">@color/color_title</item>
-        <item name="chipStrokeWidth">1dp</item>
-        <item name="chipStrokeColor">@color/material_on_surface_emphasis_medium</item>
-    </style>
-
-    <style name="Widget.App.Chip.ChipGroup" parent="Widget.MaterialComponents.ChipGroup">
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:layout_gravity">center_horizontal</item>
-    </style>
-
-    <style name="Widget.App.Chip.Multiselect" parent="Widget.Material3.Chip.Filter">
-        <item name="chipBackgroundColor">@color/material_dynamic_secondary30</item>
-        <item name="android:textAlignment">center</item>
-        <item name="checkedIconVisible">false</item>
-        <item name="android:textColor">@color/design_default_color_primary_dark</item>
-        <item name="chipStrokeWidth">1dp</item>
-        <item name="chipStrokeColor">@color/design_default_color_primary_dark</item>
-    </style>
-
-    <style name="Widget.App.Chip.Singleselect" parent="Widget.Material3.Chip.Filter">
-        <item name="chipBackgroundColor">@color/material_dynamic_secondary30</item>
-
-        <item name="chipSpacingHorizontal">0dp</item>
-        <item name="chipStartPadding">0dp</item>
-        <item name="chipEndPadding">0dp</item>
-        <item name="android:textAlignment">center</item>
-        <item name="checkedIconVisible">false</item>
-        <item name="paddingEnd">0dp</item>
-        <item name="paddingStart">0dp</item>
-
-        <item name="android:textColor">@color/design_default_color_primary_dark</item>
-        <item name="android:textSize">12sp</item>
-        <item name="chipStrokeWidth">1dp</item>
-        <item name="textAllCaps">true</item>
-        <item name="chipCornerRadius">0dp</item>
-        <item name="chipStrokeColor">@color/design_default_color_primary_dark</item>
+    <style name="MyMaterialCardView" parent="Widget.Material3.CardView.Elevated">
+        <item name="strokeWidth">0dp</item>
+        <item name="cornerRadius">15dp</item>
+        <item name="cardBackgroundColor">@color/color_background_card</item>
+        <item name="contentPadding">4dp</item>
     </style>
 
 </resources>

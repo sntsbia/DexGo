@@ -79,26 +79,26 @@ class UiUtils(val context: Context) {
 
     fun getTypeColor(type: TypeEnum): Int {
         when (type) {
-            TypeEnum.normal -> return R.color.color_normal
-            TypeEnum.fighting -> return R.color.color_fighting
-            TypeEnum.flying -> return R.color.color_flying
-            TypeEnum.poison -> return R.color.color_poison
-            TypeEnum.ground -> return R.color.color_ground
-            TypeEnum.rock -> return R.color.color_rock
-            TypeEnum.bug -> return R.color.color_bug
-            TypeEnum.ghost -> return R.color.color_ghost
-            TypeEnum.steel -> return R.color.color_steel
-            TypeEnum.fire -> return R.color.color_fire
-            TypeEnum.water -> return R.color.color_water
-            TypeEnum.grass -> return R.color.color_grass
-            TypeEnum.electric -> return R.color.color_electric
-            TypeEnum.psychic -> return R.color.color_psychic
-            TypeEnum.ice -> return R.color.color_ice
-            TypeEnum.dragon -> return R.color.color_dragon
-            TypeEnum.dark -> return R.color.color_dark
-            TypeEnum.fairy -> return R.color.color_fairy
+            TypeEnum.normal -> return R.color.color_pokemon_normal
+            TypeEnum.fighting -> return R.color.color_pokemon_fighting
+            TypeEnum.flying -> return R.color.color_pokemon_flying
+            TypeEnum.poison -> return R.color.color_pokemon_poison
+            TypeEnum.ground -> return R.color.color_pokemon_ground
+            TypeEnum.rock -> return R.color.color_pokemon_rock
+            TypeEnum.bug -> return R.color.color_pokemon_bug
+            TypeEnum.ghost -> return R.color.color_pokemon_ghost
+            TypeEnum.steel -> return R.color.color_pokemon_steel
+            TypeEnum.fire -> return R.color.color_pokemon_fire
+            TypeEnum.water -> return R.color.color_pokemon_water
+            TypeEnum.grass -> return R.color.color_pokemon_grass
+            TypeEnum.electric -> return R.color.color_pokemon_electric
+            TypeEnum.psychic -> return R.color.color_pokemon_psychic
+            TypeEnum.ice -> return R.color.color_pokemon_ice
+            TypeEnum.dragon -> return R.color.color_pokemon_dragon
+            TypeEnum.dark -> return R.color.color_pokemon_dark
+            TypeEnum.fairy -> return R.color.color_pokemon_fairy
             TypeEnum.shadow -> return R.color.color_text
-            TypeEnum.UNKNOWN, TypeEnum.none -> return R.color.color_secondary
+            TypeEnum.UNKNOWN, TypeEnum.none -> return R.color.color_purple_secondary
         }
     }
 

@@ -1,31 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_base">#222222</color>
-
+    <color name="color_background">#121212</color>
     <color name="color_splash">#0D1117</color>
 
-    <color name="color_secondary">#D3D3D3</color>
+    <color name="color_text">#EEEEEE</color>
+    <color name="color_background_card">#212121</color>
+    <color name="color_details">#424242</color>
+    <color name="color_purple_secondary">#B37B68EE</color>
+    <color name="color_blue_secondary">#B366AFE9</color>
+    <color name="color_success">#B35CB85C</color>
+    <color name="color_error">#B3C9304D</color>
 
-    <color name="color_title">#F0F8FF</color>
-    <color name="color_text">#BBBBBB</color>
+    <color name="color_pokemon_normal">#BF6A6A</color>
+    <color name="color_pokemon_fire">#FD7C4D</color>
+    <color name="color_pokemon_water">#4D4DAD</color>
+    <color name="color_pokemon_grass">#64AD64</color>
+    <color name="color_pokemon_electric">#FDE24D</color>
+    <color name="color_pokemon_psychic">#A54DA5</color>
+    <color name="color_pokemon_ice">#E0FFFF</color>
+    <color name="color_pokemon_fighting">#C86464</color>
+    <color name="color_pokemon_flying">#7995E9</color>
+    <color name="color_pokemon_ground">#AD7C5A</color>
+    <color name="color_pokemon_rock">#959595</color>
+    <color name="color_pokemon_bug">#32CC32</color>
+    <color name="color_pokemon_ghost">#804DA6</color>
+    <color name="color_pokemon_dragon">#B76FDA</color>
+    <color name="color_pokemon_dark">#4D4D4D</color>
+    <color name="color_pokemon_steel">#7DA6CA</color>
+    <color name="color_pokemon_fairy">#FD95CA</color>
+    <color name="color_pokemon_poison">#A54DA5</color>
+    <color name="color_pokemon_shadow">#696969</color>
 
-    <color name="color_normal">#D3B35C</color>
-
-    <color name="color_fire">#FF9933</color>
-    <color name="color_water">#1E90FF</color>
-    <color name="color_grass">#7CFC00</color>
-    <color name="color_electric">#FFFF33</color>
-    <color name="color_ice">#E0FFFF</color>
-    <color name="color_fighting">#FF4500</color>
-    <color name="color_poison">#DA70D6</color>
-    <color name="color_ground">#A0522D</color>
-    <color name="color_flying">#ADD8E6</color>
-    <color name="color_psychic">#FF1493</color>
-    <color name="color_bug">#7FFF00</color>
-    <color name="color_rock">#FFD700</color>
-    <color name="color_ghost">#9370DB</color>
-    <color name="color_dragon">#0047AB</color>
-    <color name="color_steel">#708090</color>
-    <color name="color_fairy">#FF69B4</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
 
 </resources>

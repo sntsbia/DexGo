@@ -101,7 +101,8 @@ class PokemonDetailActivity : AppCompatActivity() {
     private fun initData(pokemon: PokemonStatisticDTO) {
         with(binding) {
             Log.e(TAG, "initDados: $pokemon")
-            tvDescription.text = StringUtils.capitalizeFirstLetter(pokemon.name)
+            tvDetails.text = StringUtils.capitalizeFirstLetter(pokemon.name)
+            tvId.text = buildString { append(pokemon.id) }
 
             llBackground.setBackgroundResource(
                 UiUtils(this@PokemonDetailActivity).getTypeColor(

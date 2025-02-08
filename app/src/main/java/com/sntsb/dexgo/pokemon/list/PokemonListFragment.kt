@@ -1,6 +1,6 @@
 package com.sntsb.dexgo.pokemon.list
 
-import android.R
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
+import com.sntsb.dexgo.R
 import com.sntsb.dexgo.databinding.FragmentPokemonListBinding
 import com.sntsb.dexgo.pokemon.adapter.ItemPokemonAdapter
 import com.sntsb.dexgo.type.adapter.TypeDropdownAdapter
@@ -62,7 +63,7 @@ class PokemonListFragment : Fragment() {
 
         mPokemonListViewModel.types.observe(viewLifecycleOwner) { types ->
             typeAdapter = TypeDropdownAdapter(
-                requireContext(), types, R.layout.simple_spinner_dropdown_item
+                requireContext(), types, android.R.layout.simple_spinner_dropdown_item
             )
             binding.ddSearch.setAdapter(typeAdapter)
 
@@ -105,7 +106,11 @@ class PokemonListFragment : Fragment() {
                     setLoading(loading)
                 }
             }))
-        binding.rvPokemons.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rvPokemons.layoutManager = GridLayoutManager(
+            requireContext(), resources.getInteger(
+                R.integer.cols_grid
+            )
+        )
 
     }
 

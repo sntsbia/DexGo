@@ -46,6 +46,10 @@
     <string name="fairy">Fada</string>
     <string name="shadow">Sombra</string>
     <string name="empty_list">Sem Informações</string>
+
     <string name="clear">Limpar</string>
+
+    <string name="type_search">Pesquisar por tipo</string>
+    <string name="name_id_search">Pesquisar por nome ou ID</string>
 
 </resources>

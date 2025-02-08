@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin">32dp</dimen>
+    <dimen name="padding">32dp</dimen>
+    <dimen name="image_pokemon">256dp</dimen>
+</resources>
