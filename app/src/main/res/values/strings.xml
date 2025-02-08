@@ -7,4 +7,9 @@
     <string name="pokemon" translatable="false">Pokemon</string>
     <string name="type">Tipo</string>
     <string name="search">Pesquisar</string>
+    <string name="string_type_information">Informação sobre o tipo</string>
+    <string name="string_statistic">Statistic</string>
+    <string name="string_back">Voltar</string>
+    <string name="pokemon_image">Imagem do pokemon</string>
+    <string name="next">Próximo</string>
 </resources>

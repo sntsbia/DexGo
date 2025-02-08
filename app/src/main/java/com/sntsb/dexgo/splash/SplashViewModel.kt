@@ -17,7 +17,7 @@ class SplashViewModel : ViewModel() {
             Handler(Looper.getMainLooper()).postDelayed({
                 activity.startActivity(Intent(activity, MainActivity::class.java))
                 activity.finish()
-            }, 2500)
+            }, 750)
 
             isInitialized = true
         }

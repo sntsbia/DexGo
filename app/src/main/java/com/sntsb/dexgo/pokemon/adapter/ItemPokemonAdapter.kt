@@ -1,15 +1,15 @@
 package com.sntsb.dexgo.pokemon.adapter
 
 import android.content.Context
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
 import com.sntsb.dexgo.databinding.ItemPokemonBinding
+import com.sntsb.dexgo.pokemon.detail.PokemonDetailActivity
 import com.sntsb.dexgo.pokemon.dto.PokemonDTO
 import com.sntsb.dexgo.utils.StringUtils
 
@@ -44,12 +44,9 @@ class ItemPokemonAdapter(private val mContext: Context) :
 
             databinding.cvItemPokemon.setOnClickListener {
 
-                Snackbar.make(
-                    databinding.root,
-                    "${pokemon.let { "${it.name} (${it.id})" }}}",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                Log.e(TAG, "bind: Clicked: $pokemon")
+                mContext.startActivity(Intent(context, PokemonDetailActivity::class.java).apply {
+                    putExtra(PokemonDetailActivity.POKEMON_ID, pokemon.id)
+                })
             }
 
         }

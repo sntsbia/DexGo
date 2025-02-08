@@ -11,7 +11,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
+object NetworkModule {
+
+    private const val CONNECT_TIMEOUT = 20L
+    private const val READ_TIMEOUT = 60L
+    private const val WRITE_TIMEOUT = 120L
 
     @Provides
     @Singleton

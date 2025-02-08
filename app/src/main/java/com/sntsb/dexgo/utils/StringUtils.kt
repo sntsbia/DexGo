@@ -1,5 +1,7 @@
 package com.sntsb.dexgo.utils
 
+import com.google.gson.GsonBuilder
+
 class StringUtils {
     companion object {
 
@@ -15,6 +17,13 @@ class StringUtils {
 
         fun allLowercase(string: String): String {
             return string.lowercase()
+        }
+
+        fun printJSON(map: Map<String, Any?>): String {
+            val gson = GsonBuilder().setPrettyPrinting().create()
+            val jsonString = gson.toJson(map)
+
+            return jsonString.replace("\n", "\n\t")
         }
     }
 }
