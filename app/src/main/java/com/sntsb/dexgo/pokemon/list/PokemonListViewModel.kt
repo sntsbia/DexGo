@@ -20,22 +20,25 @@ class PokemonListViewModel @Inject constructor(private val repository: PokemonRe
 
     fun setSearchQuery(query: String) {
         _searchQuery.value = query
+    }
 
+    fun setLoading(loading: Boolean) {
+        _loading.value = loading
     }
 
     var pokemonPager = repository.pagingSource("").flow.cachedIn(viewModelScope)
 
     fun getPokemonPager(query: String) {
-        _loading.value = true
+        setLoading(true)
         pokemonPager = repository.pagingSource(query).flow.cachedIn(viewModelScope)
-        _loading.value = false
+        setLoading(false)
     }
 
     fun refreshPokemonList() {
-        _loading.value = true
+        setLoading(true)
         pokemonPager = repository.pagingSource("").flow.cachedIn(viewModelScope)
 
-        _loading.value = false
+        setLoading(false)
 
     }
 

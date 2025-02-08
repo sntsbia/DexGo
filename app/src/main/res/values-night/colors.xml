@@ -14,9 +14,9 @@
     <color name="color_fire">#FF9933</color>
     <color name="color_water">#1E90FF</color>
     <color name="color_grass">#7CFC00</color>
-    <color name="color_eletric">#FFFF33</color>
+    <color name="color_electric">#FFFF33</color>
     <color name="color_ice">#E0FFFF</color>
-    <color name="color_fighter">#FF4500</color>
+    <color name="color_fighting">#FF4500</color>
     <color name="color_poison">#DA70D6</color>
     <color name="color_ground">#A0522D</color>
     <color name="color_flying">#ADD8E6</color>
@@ -25,7 +25,7 @@
     <color name="color_rock">#FFD700</color>
     <color name="color_ghost">#9370DB</color>
     <color name="color_dragon">#0047AB</color>
-    <color name="color_metallic">#708090</color>
+    <color name="color_steel">#708090</color>
     <color name="color_fairy">#FF69B4</color>
 
 </resources>

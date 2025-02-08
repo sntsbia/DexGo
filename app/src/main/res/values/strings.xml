@@ -3,13 +3,48 @@
     <string name="click_me">Clique Aqui</string>
     <string name="string_chip_1" translatable="false">Chip 1</string>
     <string name="string_chip_2" translatable="false">Chip 2</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="pokemon" translatable="false">Pokemon</string>
     <string name="type">Tipo</string>
     <string name="search">Pesquisar</string>
     <string name="string_type_information">Informação sobre o tipo</string>
-    <string name="string_statistic">Statistic</string>
+    <string name="string_statistic">Estatística</string>
     <string name="string_back">Voltar</string>
     <string name="pokemon_image">Imagem do pokemon</string>
     <string name="next">Próximo</string>
+
+    <string name="hp">HP</string>
+    <string name="attack">Ataque</string>
+    <string name="defense">Defesa</string>
+    <string name="special_attack">Ataque Especial</string>
+    <string name="special_defense">Defesa Especial</string>
+    <string name="speed">Velocidade</string>
+    <string name="total">Total</string>
+    <string name="height">Altura:</string>
+    <string name="weight">Peso:</string>
+
+    <string-array name="types_pokemon">
+        <item name="none">Nenhum</item>
+        <item name="unknown">Desconhecido</item>
+
+        <item name="normal">Normal</item>
+        <item name="fighting">Lutador</item>
+        <item name="flying">Voador</item>
+        <item name="poison">Veneno</item>
+        <item name="ground">Solo</item>
+        <item name="rock">Pedra</item>
+        <item name="bug">Inseto</item>
+        <item name="ghost">Fantasma</item>
+        <item name="steel">Aço</item>
+        <item name="fire">Fogo</item>
+        <item name="water">Água</item>
+        <item name="grass">Grama</item>
+        <item name="electric">Elétrico</item>
+        <item name="psychic">Psíquico</item>
+        <item name="ice">Gelo</item>
+        <item name="dragon">Dragão</item>
+        <item name="dark">Noturno</item>
+        <item name="fairy">Fada</item>
+        <item name="shadow">Sombra</item>
+
+    </string-array>
 </resources>

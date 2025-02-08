@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,7 +12,9 @@ import com.bumptech.glide.Glide
 import com.sntsb.dexgo.databinding.ItemPokemonBinding
 import com.sntsb.dexgo.pokemon.detail.PokemonDetailActivity
 import com.sntsb.dexgo.pokemon.dto.PokemonDTO
+import com.sntsb.dexgo.type.enums.TypeEnum
 import com.sntsb.dexgo.utils.StringUtils
+import com.sntsb.dexgo.utils.UiUtils
 
 class ItemPokemonAdapter(private val mContext: Context) :
     PagingDataAdapter<PokemonDTO, ItemPokemonAdapter.PokemonViewHolder>(POKEMON_COMPARATOR) {
@@ -41,6 +44,16 @@ class ItemPokemonAdapter(private val mContext: Context) :
             databinding.tvNomePokemon.text = StringUtils.capitalizeFirstLetter(pokemon.name)
 
             Glide.with(databinding.root).load(pokemon.image).into(databinding.ivPokemon)
+
+            if (pokemon.typeList.isNotEmpty()) {
+                pokemon.typeList.firstOrNull()?.let { tipo ->
+                    databinding.cvItemPokemon.backgroundTintList = ContextCompat.getColorStateList(
+                        context, UiUtils(context).getTypeColor(
+                            TypeEnum.from(tipo.description)
+                        )
+                    )
+                }
+            }
 
             databinding.cvItemPokemon.setOnClickListener {
 

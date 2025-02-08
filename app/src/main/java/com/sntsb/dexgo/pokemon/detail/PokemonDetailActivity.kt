@@ -17,7 +17,10 @@ import com.sntsb.dexgo.databinding.ActivityPokemonDetailBinding
 import com.sntsb.dexgo.pokemon.adapter.StatisticAdapter
 import com.sntsb.dexgo.pokemon.adapter.TypeAdapter
 import com.sntsb.dexgo.pokemon.dto.PokemonStatisticDTO
+import com.sntsb.dexgo.type.enums.TypeEnum
+import com.sntsb.dexgo.utils.MathUtils
 import com.sntsb.dexgo.utils.StringUtils
+import com.sntsb.dexgo.utils.UiUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -99,6 +102,21 @@ class PokemonDetailActivity : AppCompatActivity() {
         with(binding) {
             Log.e(TAG, "initDados: $pokemon")
             tvDescription.text = StringUtils.capitalizeFirstLetter(pokemon.name)
+
+            llBackground.setBackgroundResource(
+                UiUtils(this@PokemonDetailActivity).getTypeColor(
+                    TypeEnum.from(pokemon.typeList[0].description)
+                )
+            )
+
+            tvWeight.text = buildString {
+                append(MathUtils.convertHgToKg(pokemon.weight.toDouble()).let { "%.2f".format(it) })
+                append(" kg")
+            }
+            tvHeight.text = buildString {
+                append(MathUtils.convertDmToM(pokemon.height.toDouble()).let { "%.2f".format(it) })
+                append(" m")
+            }
 
             typeAdapter = TypeAdapter(pokemon.typeList, this@PokemonDetailActivity)
             rvTypes.adapter = typeAdapter

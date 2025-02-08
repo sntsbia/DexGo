@@ -59,7 +59,7 @@ class PokemonListFragment : Fragment() {
             }
 
             pokemonAdapter.loadStateFlow.collectLatest { loadStates ->
-                binding.swipeRefreshLayout.isRefreshing = loadStates.refresh is LoadState.Loading
+                mPokemonListViewModel.setLoading(loadStates.refresh is LoadState.Loading)
             }
         }
     }

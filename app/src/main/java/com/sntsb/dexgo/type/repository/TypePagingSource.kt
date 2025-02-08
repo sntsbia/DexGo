@@ -5,6 +5,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.sntsb.dexgo.pokemon.api.PokemonAPI
 import com.sntsb.dexgo.pokemon.dto.PokemonDTO
+import com.sntsb.dexgo.type.dto.TypeDTO
 import com.sntsb.dexgo.utils.PokemonUtils
 
 class TypePagingSource(private val pokemonApi: PokemonAPI, private val query: String = "") :
@@ -24,8 +25,17 @@ class TypePagingSource(private val pokemonApi: PokemonAPI, private val query: St
                 val id = offset + index + 1
                 val imageUrl =
                     PokemonUtils.getPokemonImageUrl(id) // Função para obter a URL da imagem
+                val pokemonDetalhesDTO = pokemonApi.getPokemonById(pokemon.name)
+
                 PokemonDTO(
-                    id, pokemon.name, imageUrl
+                    id, pokemon.name, imageUrl, pokemonDetalhesDTO?.typeList?.map { typeResponse ->
+                        val idTipo = typeResponse.type.url.split("/").let { it[it.size - 2] }
+                        val imagem = PokemonUtils.getPokemonTypeImageUrl(idTipo.toIntOrNull() ?: -1)
+
+                        TypeDTO(
+                            idTipo.toIntOrNull() ?: -1, typeResponse.type.name, imagem
+                        )
+                    } ?: emptyList()
                 )
             }
 

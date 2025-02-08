@@ -3,4 +3,42 @@
     <string name="click_me">Click me</string>
     <string name="type">Type</string>
     <string name="search">Search</string>
+    <string name="string_type_information">Type Information</string>
+    <string name="string_statistic">Statistic</string>
+    <string name="string_back">Back</string>
+    <string name="pokemon_image">Pokemon Image</string>
+    <string name="next">Next</string>
+
+    <string name="hp">HP</string>
+    <string name="attack">Attack</string>
+    <string name="defense">Defense</string>
+    <string name="special_attack">Special Attack</string>
+    <string name="special_defense">Special Defense</string>
+    <string name="speed">Speed</string>
+    <string name="total">Total</string>
+
+    <string-array name="types_pokemon">
+        <item name="none">None</item>
+        <item name="unknown">Unknown</item>
+
+        <item name="normal">Normal</item>
+        <item name="fighting">Fighting</item>
+        <item name="flying">Flying</item>
+        <item name="poison">Poison</item>
+        <item name="ground">Ground</item>
+        <item name="rock">Rock</item>
+        <item name="bug">Bug</item>
+        <item name="ghost">Ghost</item>
+        <item name="steel">Steel</item>
+        <item name="fire">Fire</item>
+        <item name="water">Water</item>
+        <item name="grass">Grass</item>
+        <item name="electric">Electric</item>
+        <item name="psychic">Psychic</item>
+        <item name="ice">Ice</item>
+        <item name="dragon">Dragon</item>
+        <item name="dark">Dark</item>
+        <item name="fairy">Fairy</item>
+        <item name="shadow">Shadow</item>
+    </string-array>
 </resources>

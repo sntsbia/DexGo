@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sntsb.dexgo.databinding.ItemStatisticBinding
 import com.sntsb.dexgo.pokemon.dto.StatisticDTO
+import com.sntsb.dexgo.utils.UiUtils
 
 class StatisticAdapter(private val statisticDTOList: List<StatisticDTO>, val context: Context) :
     RecyclerView.Adapter<StatisticAdapter.StatisticItemViewHolder>() {
@@ -15,7 +16,7 @@ class StatisticAdapter(private val statisticDTOList: List<StatisticDTO>, val con
 
         fun bind(tipo: StatisticDTO) {
             databinding.statusItemDataBinding = tipo
-            databinding.tvStatistic.text = tipo.description
+            databinding.tvStatistic.text = UiUtils(context).getStatusLabel(tipo.description)
             databinding.tvValue.text = buildString { append(tipo.value) }
         }
     }
