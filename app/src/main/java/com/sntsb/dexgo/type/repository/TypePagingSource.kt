@@ -23,20 +23,20 @@ class TypePagingSource(private val pokemonApi: PokemonAPI, private val query: St
 
             val pokemonList = response.results.mapIndexed { index, pokemon ->
                 val id = offset + index + 1
-                val imageUrl =
-                    PokemonUtils.getPokemonImageUrl(id) // Função para obter a URL da imagem
+                val imageUrl = PokemonUtils.getPokemonImageUrl(id)
                 val pokemonDetalhesDTO = pokemonApi.getPokemonById(pokemon.name)
 
-                PokemonDTO(
-                    id, pokemon.name, imageUrl, pokemonDetalhesDTO?.typeList?.map { typeResponse ->
+                PokemonDTO(id,
+                    pokemon.name,
+                    imageUrl,
+                    pokemonDetalhesDTO?.typeList?.map { typeResponse ->
                         val idTipo = typeResponse.type.url.split("/").let { it[it.size - 2] }
                         val imagem = PokemonUtils.getPokemonTypeImageUrl(idTipo.toIntOrNull() ?: -1)
 
                         TypeDTO(
                             idTipo.toIntOrNull() ?: -1, typeResponse.type.name, imagem
                         )
-                    } ?: emptyList()
-                )
+                    } ?: emptyList())
             }
 
             return LoadResult.Page(

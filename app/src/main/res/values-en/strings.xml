@@ -16,29 +16,31 @@
     <string name="special_defense">Special Defense</string>
     <string name="speed">Speed</string>
     <string name="total">Total</string>
+    <string name="height">Height:</string>
+    <string name="weight">Weight:</string>
 
-    <string-array name="types_pokemon">
-        <item name="none">None</item>
-        <item name="unknown">Unknown</item>
+    <string name="none">None</string>
+    <string name="unknown">Unknown</string>
 
-        <item name="normal">Normal</item>
-        <item name="fighting">Fighting</item>
-        <item name="flying">Flying</item>
-        <item name="poison">Poison</item>
-        <item name="ground">Ground</item>
-        <item name="rock">Rock</item>
-        <item name="bug">Bug</item>
-        <item name="ghost">Ghost</item>
-        <item name="steel">Steel</item>
-        <item name="fire">Fire</item>
-        <item name="water">Water</item>
-        <item name="grass">Grass</item>
-        <item name="electric">Electric</item>
-        <item name="psychic">Psychic</item>
-        <item name="ice">Ice</item>
-        <item name="dragon">Dragon</item>
-        <item name="dark">Dark</item>
-        <item name="fairy">Fairy</item>
-        <item name="shadow">Shadow</item>
-    </string-array>
+    <string name="normal">Normal</string>
+    <string name="fighting">Fighting</string>
+    <string name="flying">Flying</string>
+    <string name="poison">Poison</string>
+    <string name="ground">Ground</string>
+    <string name="rock">Rock</string>
+    <string name="bug">Bug</string>
+    <string name="ghost">Ghost</string>
+    <string name="steel">Steel</string>
+    <string name="fire">Fire</string>
+    <string name="water">Water</string>
+    <string name="grass">Grass</string>
+    <string name="electric">Electric</string>
+    <string name="psychic">Psychic</string>
+    <string name="ice">Ice</string>
+    <string name="dragon">Dragon</string>
+    <string name="dark">Dark</string>
+    <string name="fairy">Fairy</string>
+    <string name="shadow">Shadow</string>
+
+    <string name="empty_list">Empty List</string>
 </resources>

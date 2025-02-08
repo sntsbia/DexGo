@@ -1,33 +1,28 @@
-package com.sntsb.dexgo.pokemon.repository
+package com.sntsb.dexgo.type.repository
 
 import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.PagingSource
 import com.sntsb.dexgo.paging.model.PagingParams
 import com.sntsb.dexgo.pokemon.api.PokemonAPI
 import com.sntsb.dexgo.pokemon.dto.ImageDTO
 import com.sntsb.dexgo.pokemon.dto.PokemonDTO
 import com.sntsb.dexgo.pokemon.dto.PokemonStatisticDTO
 import com.sntsb.dexgo.pokemon.dto.StatisticDTO
+import com.sntsb.dexgo.pokemon.repository.PokemonPagingSource
 import com.sntsb.dexgo.type.dto.TypeDTO
 import com.sntsb.dexgo.utils.PokemonUtils
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class PokemonRepository @Inject constructor(private val pokemonApi: PokemonAPI) {
+class TypeRepository @Inject constructor(private val pokemonApi: PokemonAPI) {
 
-    private fun getPagingSource(filtro: String): PagingSource<Int, PokemonDTO> {
-        val pagingParams = PagingParams(
-            filter = filtro
-        )
-        return PokemonPagingSource(pokemonApi, pagingParams)
-    }
+    val pagingSource = fun(query: String): Pager<Int, PokemonDTO> {
 
-    fun getPager(filtro: String): Flow<PagingData<PokemonDTO>> {
-        return Pager(config = PagingConfig(pageSize = PokemonAPI.LIMIT),
-            pagingSourceFactory = { getPagingSource(filtro) }).flow
+        return Pager(config = PagingConfig(pageSize = 20, enablePlaceholders = false),
+            pagingSourceFactory = {
+                PokemonPagingSource(pokemonApi, PagingParams(query))
+            })
+
     }
 
     suspend fun getOne(id: String): PokemonStatisticDTO? {
@@ -37,28 +32,28 @@ class PokemonRepository @Inject constructor(private val pokemonApi: PokemonAPI) 
 
             return response?.let { pokemon ->
 
-                Log.e(TAG, "getOne: $pokemon")
+                Log.e(TAG, "getOne: ${pokemon}")
 
-                val statisticDTOList = pokemon.statisticList.map { stat ->
+                val status = pokemon.statisticList.map { stat ->
                     StatisticDTO(stat.stat.name, stat.valorBase)
                 }
 
-                val typeDTOList = pokemon.typeList.map { typePokemon ->
+                val tipos = pokemon.typeList.map { type ->
 
-                    val idType = typePokemon.type.url.split("/").let { it[it.size - 2] }
-                    val image = PokemonUtils.getPokemonTypeImageUrl(idType.toIntOrNull() ?: -1)
+                    val idTipo = type.type.url.split("/").let { it[it.size - 2] }
+                    val imagem = PokemonUtils.getPokemonTypeImageUrl(idTipo.toIntOrNull() ?: -1)
                     TypeDTO(
-                        idType.toIntOrNull() ?: -1, typePokemon.type.name, image
+                        idTipo.toIntOrNull() ?: -1, type.type.name, imagem
                     )
                 }
 
-                val imageArray = ArrayList<ImageDTO>()
-                imageArray.add(
+                val imagemArray = ArrayList<ImageDTO>()
+                imagemArray.add(
                     ImageDTO(
                         ImageDTO.IMAGEM_FRONT, PokemonUtils.getPokemonImageUrl(pokemon.id)
                     )
                 )
-                imageArray.add(
+                imagemArray.add(
                     ImageDTO(
                         ImageDTO.IMAGEM_SHINY, PokemonUtils.getPokemonShinyImageUrl(pokemon.id)
                     )
@@ -67,11 +62,11 @@ class PokemonRepository @Inject constructor(private val pokemonApi: PokemonAPI) 
                 PokemonStatisticDTO(
                     pokemon.id,
                     pokemon.name,
-                    imageArray,
+                    imagemArray,
                     pokemon.height,
                     pokemon.weight,
-                    typeDTOList,
-                    statisticDTOList
+                    tipos,
+                    status
                 )
             }
 

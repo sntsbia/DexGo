@@ -12,7 +12,11 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.sntsb.dexgo.databinding.FragmentPokemonListBinding
 import com.sntsb.dexgo.pokemon.adapter.ItemPokemonAdapter
+import com.sntsb.dexgo.type.adapter.TypeDropdownAdapter
+import com.sntsb.dexgo.type.enums.TypeEnum
 import com.sntsb.dexgo.utils.StringUtils
+import com.sntsb.dexgo.utils.UiUtils
+import com.sntsb.dexgo.utils.adapter.LoadStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -25,6 +29,7 @@ class PokemonListFragment : Fragment() {
     private lateinit var mPokemonListViewModel: PokemonListViewModel
 
     private lateinit var pokemonAdapter: ItemPokemonAdapter
+    private lateinit var typeAdapter: TypeDropdownAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,25 +42,21 @@ class PokemonListFragment : Fragment() {
 
         initViews()
 
+        mPokemonListViewModel.setQueryString("")
+
         binding.progressbar.visibility = View.GONE
 
     }
 
     private fun initObservers() {
         lifecycleScope.launch {
-            mPokemonListViewModel.searchQuery.observe(viewLifecycleOwner) { query ->
-                mPokemonListViewModel.getPokemonPager(query)
-            }
 
             mPokemonListViewModel.loading.observe(viewLifecycleOwner) { loading ->
                 setLoading(loading)
             }
 
-            mPokemonListViewModel.pokemonPager.collectLatest { pagingData ->
-                Log.e(TAG, "onViewCreated: atualizou")
-
-                pokemonAdapter.submitData(pagingData)
-
+            mPokemonListViewModel.pagingData.observe(viewLifecycleOwner) { pagingData ->
+                pokemonAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
             }
 
             pokemonAdapter.loadStateFlow.collectLatest { loadStates ->
@@ -69,12 +70,73 @@ class PokemonListFragment : Fragment() {
     }
 
     private fun initViews() {
-        binding.rvPokemons.adapter = pokemonAdapter
+
+        initDropdown()
+
+        initAdapter()
+
+        initListener()
+
+    }
+
+    private fun initAdapter() {
+
+        binding.rvPokemons.adapter =
+            pokemonAdapter.withLoadStateFooter(footer = LoadStateAdapter(object :
+                LoadStateAdapter.OnAction {
+                override fun isLoading(loading: Boolean) {
+                    setLoading(loading)
+                }
+            }))
         binding.rvPokemons.layoutManager = GridLayoutManager(requireContext(), 2)
+
+    }
+
+    private fun initDropdown() {
+
+        val tipos = TypeEnum.entries.map {
+            UiUtils(requireContext()).getTipoLabel(it)
+        }.toList().let {
+            ArrayList(it)
+        }
+
+        tipos.sort()
+
+        typeAdapter = TypeDropdownAdapter(
+            requireContext(),
+            tipos,
+            com.google.android.material.R.layout.support_simple_spinner_dropdown_item
+        )
+        binding.ddSearch.setAdapter(typeAdapter)
+        typeAdapter.notifyDataSetChanged()
+
+        binding.ddSearch.setOnItemClickListener { parent, view, position, id ->
+            val tipo = typeAdapter.getItem(position)
+
+            Log.e(TAG, "initDropdown: $tipo")
+
+
+        }
+
+    }
+
+    private fun initListener() {
+
+        pokemonAdapter.addLoadStateListener { loadStates ->
+            val isEmpty =
+                pokemonAdapter.itemCount == 0 && loadStates.refresh is LoadState.NotLoading
+            if (isEmpty) {
+                binding.tvEmptyList.visibility = View.VISIBLE
+                binding.rvPokemons.visibility = View.GONE
+            } else {
+                binding.tvEmptyList.visibility = View.GONE
+                binding.rvPokemons.visibility = View.VISIBLE
+            }
+        }
 
         binding.swipeRefreshLayout.setOnRefreshListener {
 
-            mPokemonListViewModel.refreshPokemonList()
+            mPokemonListViewModel.setQueryString("")
             binding.rvPokemons.layoutManager?.scrollToPosition(0)
 
             binding.swipeRefreshLayout.isRefreshing = false
@@ -97,7 +159,7 @@ class PokemonListFragment : Fragment() {
         binding.btnSearch.setOnClickListener {
             val query = binding.txtSearch.text.toString()
             if (mPokemonListViewModel.searchQuery.value != query) {
-                mPokemonListViewModel.setSearchQuery(StringUtils.allLowercase(query))
+                mPokemonListViewModel.setQueryString(StringUtils.allLowercase(query))
             }
         }
     }

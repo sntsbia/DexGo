@@ -15,8 +15,8 @@ import com.bumptech.glide.Glide
 import com.sntsb.dexgo.R
 import com.sntsb.dexgo.databinding.ActivityPokemonDetailBinding
 import com.sntsb.dexgo.pokemon.adapter.StatisticAdapter
-import com.sntsb.dexgo.pokemon.adapter.TypeAdapter
 import com.sntsb.dexgo.pokemon.dto.PokemonStatisticDTO
+import com.sntsb.dexgo.type.adapter.TypeAdapter
 import com.sntsb.dexgo.type.enums.TypeEnum
 import com.sntsb.dexgo.utils.MathUtils
 import com.sntsb.dexgo.utils.StringUtils
@@ -128,17 +128,7 @@ class PokemonDetailActivity : AppCompatActivity() {
 
             viewModel.setIndexVisiblePhoto(0)
 
-            ibNext.setOnClickListener {
-                viewModel.indexVisiblePhoto.value?.let { index ->
-                    if (index < pokemon.image.size - 1) {
-                        viewModel.setIndexVisiblePhoto(index + 1)
-                    } else {
-                        viewModel.setIndexVisiblePhoto(0)
-                    }
-                }
-            }
-
-            ibNext.setOnClickListener {
+            ibBack.setOnClickListener {
                 viewModel.indexVisiblePhoto.value?.let { index ->
                     if (index > 0) {
                         viewModel.setIndexVisiblePhoto(index - 1)
@@ -148,6 +138,15 @@ class PokemonDetailActivity : AppCompatActivity() {
                 }
             }
 
+            ibNext.setOnClickListener {
+                viewModel.indexVisiblePhoto.value?.let { index ->
+                    if (index < pokemon.image.size - 1) {
+                        viewModel.setIndexVisiblePhoto(index + 1)
+                    } else {
+                        viewModel.setIndexVisiblePhoto(0)
+                    }
+                }
+            }
         }
     }
 

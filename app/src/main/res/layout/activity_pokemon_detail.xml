@@ -121,7 +121,7 @@
                             android:id="@+id/ll_details"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/tv_description"
+                            android:layout_below="@id/rv_types"
                             android:gravity="center">
 
                             <androidx.constraintlayout.widget.ConstraintLayout

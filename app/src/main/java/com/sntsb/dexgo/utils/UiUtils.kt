@@ -26,6 +26,57 @@ class UiUtils(val context: Context) {
 
     }
 
+    fun getTypeByLabel(label: String): TypeEnum {
+        when (label) {
+            context.resources.getString(R.string.normal) -> return TypeEnum.normal
+            context.resources.getString(R.string.fighting) -> return TypeEnum.fighting
+            context.resources.getString(R.string.flying) -> return TypeEnum.flying
+            context.resources.getString(R.string.poison) -> return TypeEnum.poison
+            context.resources.getString(R.string.ground) -> return TypeEnum.ground
+            context.resources.getString(R.string.rock) -> return TypeEnum.rock
+            context.resources.getString(R.string.bug) -> return TypeEnum.bug
+            context.resources.getString(R.string.ghost) -> return TypeEnum.ghost
+            context.resources.getString(R.string.steel) -> return TypeEnum.steel
+            context.resources.getString(R.string.fire) -> return TypeEnum.fire
+            context.resources.getString(R.string.water) -> return TypeEnum.water
+            context.resources.getString(R.string.grass) -> return TypeEnum.grass
+            context.resources.getString(R.string.electric) -> return TypeEnum.electric
+            context.resources.getString(R.string.psychic) -> return TypeEnum.psychic
+            context.resources.getString(R.string.ice) -> return TypeEnum.ice
+            context.resources.getString(R.string.dragon) -> return TypeEnum.dragon
+            context.resources.getString(R.string.dark) -> return TypeEnum.dark
+            context.resources.getString(R.string.fairy) -> return TypeEnum.fairy
+            context.resources.getString(R.string.shadow) -> return TypeEnum.shadow
+            else -> return TypeEnum.UNKNOWN
+        }
+    }
+
+    fun getTipoLabel(tipo: TypeEnum): String {
+        when (tipo) {
+            TypeEnum.normal -> return context.resources.getString(R.string.normal)
+            TypeEnum.fighting -> return context.resources.getString(R.string.fighting)
+            TypeEnum.flying -> return context.resources.getString(R.string.flying)
+            TypeEnum.poison -> return context.resources.getString(R.string.poison)
+            TypeEnum.ground -> return context.resources.getString(R.string.ground)
+            TypeEnum.rock -> return context.resources.getString(R.string.rock)
+            TypeEnum.bug -> return context.resources.getString(R.string.bug)
+            TypeEnum.ghost -> return context.resources.getString(R.string.ghost)
+            TypeEnum.steel -> return context.resources.getString(R.string.steel)
+            TypeEnum.fire -> return context.resources.getString(R.string.fire)
+            TypeEnum.water -> return context.resources.getString(R.string.water)
+            TypeEnum.grass -> return context.resources.getString(R.string.grass)
+            TypeEnum.electric -> return context.resources.getString(R.string.electric)
+            TypeEnum.psychic -> return context.resources.getString(R.string.psychic)
+            TypeEnum.ice -> return context.resources.getString(R.string.ice)
+            TypeEnum.dragon -> return context.resources.getString(R.string.dragon)
+            TypeEnum.dark -> return context.resources.getString(R.string.dark)
+            TypeEnum.fairy -> return context.resources.getString(R.string.fairy)
+            TypeEnum.shadow -> return context.resources.getString(R.string.shadow)
+            TypeEnum.UNKNOWN -> return context.resources.getString(R.string.unknown)
+            TypeEnum.none -> return ""
+        }
+    }
+
     fun getTypeColor(tipo: TypeEnum): Int {
         when (tipo) {
             TypeEnum.normal -> return R.color.color_normal
@@ -46,7 +97,8 @@ class UiUtils(val context: Context) {
             TypeEnum.dragon -> return R.color.color_dragon
             TypeEnum.dark -> return R.color.color_dark
             TypeEnum.fairy -> return R.color.color_fairy
-            TypeEnum.UNKNOWN -> return R.color.color_secondary
+            TypeEnum.shadow -> return R.color.color_text
+            TypeEnum.UNKNOWN, TypeEnum.none -> return R.color.color_secondary
         }
     }
 

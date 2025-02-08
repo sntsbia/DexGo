@@ -1,4 +1,4 @@
-package com.sntsb.dexgo.pokemon.adapter
+package com.sntsb.dexgo.type.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
