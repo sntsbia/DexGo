@@ -1,3 +1,7 @@
 package com.sntsb.dexgo.type.model
 
-class TypeModel {}
+data class TypeModel(
+
+    val id: Int, val description: String
+
+)

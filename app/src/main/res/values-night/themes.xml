@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.DexGo" parent="Theme.Material3.Dark.NoActionBar">
-
-        <item name="backgroundColor">@color/color_base</item>
-        <item name="colorOnPrimary">@color/color_text</item>
-        <item name="android:statusBarColor">@color/color_secondary</item>
+    <style name="Theme.DexGo" parent="Theme.Material3.Dark">
 
     </style>
 </resources>

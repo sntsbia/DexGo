@@ -1,3 +1,60 @@
 <resources>
-    <string name="app_name">DexGo</string>
+    <string name="app_name" translatable="false">DexGo</string>
+    <string name="click_me">Clique Aqui</string>
+    <string name="string_chip_1" translatable="false">Chip 1</string>
+    <string name="string_chip_2" translatable="false">Chip 2</string>
+    <string name="pokemon" translatable="false">Pokemon</string>
+    <string name="type">Tipo</string>
+    <string name="search">Pesquisar</string>
+    <string name="string_type_information">Informação sobre o tipo</string>
+    <string name="string_statistic">Estatística</string>
+    <string name="string_back">Voltar</string>
+    <string name="pokemon_image">Imagem do pokemon</string>
+    <string name="next">Próximo</string>
+
+    <string name="hp">HP</string>
+    <string name="attack">Ataque</string>
+    <string name="defense">Defesa</string>
+    <string name="special_attack">Ataque Especial</string>
+    <string name="special_defense">Defesa Especial</string>
+    <string name="speed">Velocidade</string>
+    <string name="total">Total</string>
+    <string name="height">Altura:</string>
+    <string name="weight">Peso:</string>
+
+
+    <string name="none">Nenhum</string>
+    <string name="unknown">Desconhecido</string>
+
+    <string name="normal">Normal</string>
+    <string name="fighting">Lutador</string>
+    <string name="flying">Voador</string>
+    <string name="poison">Veneno</string>
+    <string name="ground">Solo</string>
+    <string name="rock">Pedra</string>
+    <string name="bug">Inseto</string>
+    <string name="ghost">Fantasma</string>
+    <string name="steel">Aço</string>
+    <string name="fire">Fogo</string>
+    <string name="water">Água</string>
+    <string name="grass">Grama</string>
+    <string name="electric">Elétrico</string>
+    <string name="psychic">Psíquico</string>
+    <string name="ice">Gelo</string>
+    <string name="dragon">Dragão</string>
+    <string name="dark">Noturno</string>
+    <string name="fairy">Fada</string>
+    <string name="shadow">Sombra</string>
+    <string name="empty_list">Sem Informações</string>
+
+    <string name="clear">Limpar</string>
+
+    <string name="type_search">Pesquisar por tipo</string>
+    <string name="name_id_search">Pesquisar por nome ou ID</string>
+
+    <string name="connection_re_established">Conexão restaurada</string>
+    <string name="no_connection">Sem conexão</string>
+    <string name="info_no_connection">Ops! Parece que você está offline. Conecte-se à internet para acessar as informações</string>
+
+
 </resources>

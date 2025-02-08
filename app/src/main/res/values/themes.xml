@@ -1,15 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.DexGo" parent="android:Theme.Material.Light.NoActionBar.Fullscreen">
-        <item name="backgroundColor">@color/color_base</item>
+    <style name="Theme.DexGo" parent="Theme.Material3.DayNight">
+
+        <item name="backgroundColor">@color/color_background</item>
+        <item name="android:statusBarColor">@color/color_background</item>
+        <item name="android:windowLightStatusBar">true</item>
         <item name="colorOnPrimary">@color/color_text</item>
-        <item name="android:statusBarColor">@color/color_secondary</item>
+
+        <item name="colorPrimary">@color/color_blue_secondary</item>
+        <!--  Secondary brand color.  -->
+        <item name="colorSecondary">@color/color_purple_secondary</item>
+        <item name="colorOnSecondary">@color/color_text</item>
+
+        <item name="textInputOutlinedStyle">@style/MyTextInputLayoutOutlinedBox</item>
+        <item name="textInputStyle">@style/MyTextInputLayoutOutlinedBox</item>
+        <item name="materialCardViewStyle">@style/MyMaterialCardView</item>
+
     </style>
 
-    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/color_splash</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
-        <item name="postSplashScreenTheme">@style/Theme.DexGo</item>
+    <style name="MyTextInputLayoutOutlinedBox" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/color_text</item>
+        <item name="errorTextColor">@color/color_error</item>
+        <item name="endIconTint">@color/color_text</item>
+        <item name="startIconTint">@color/color_text</item>
+
+        <item name="errorIconTint">@color/color_error</item>
     </style>
+
+    <style name="MyMaterialCardView" parent="Widget.Material3.CardView.Elevated">
+        <item name="strokeWidth">0dp</item>
+        <item name="cornerRadius">15dp</item>
+        <item name="cardBackgroundColor">@color/color_background_card</item>
+        <item name="contentPadding">4dp</item>
+    </style>
+
 </resources>

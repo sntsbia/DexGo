@@ -1,42 +1,45 @@
 package com.sntsb.dexgo.main
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.sntsb.dexgo.R
 import com.sntsb.dexgo.databinding.ActivityMainBinding
+import com.sntsb.dexgo.pokemon.list.PokemonListFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : ComponentActivity() {
-
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: MainViewModel by viewModels()
 
+    private lateinit var mPokemonListFragment: PokemonListFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        actionBar?.setDisplayShowTitleEnabled(false)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding.myViewModel = viewModel
 
-        try {
+        supportActionBar?.hide()
 
-            val splashScreen = installSplashScreen()
+        mPokemonListFragment = PokemonListFragment.newInstance()
 
-            splashScreen.setOnExitAnimationListener { splashScreenView ->
-                splashScreenView.iconView.animate().setDuration(2500).alpha(0f).withEndAction {
-                    splashScreenView.remove()
-                }.start()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_lista_pokemon, mPokemonListFragment).commitAllowingStateLoss()
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                true
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
 
-        viewModel.setText()
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }

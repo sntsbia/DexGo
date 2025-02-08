@@ -3,8 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <application
+        android:name=".DexGoApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -15,7 +18,13 @@
         android:theme="@style/Theme.DexGo"
         tools:targetApi="31">
         <activity
+            android:name=".pokemon.detail.PokemonDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".main.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".splash.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.DexGo">
             <intent-filter>
